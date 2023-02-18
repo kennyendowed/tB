@@ -1,0 +1,31 @@
+/* .search{
+    width: 230px !important;
+} */
+.button{
+    width:150px;
+    height: 35px;
+    background-color:#fbcf33;
+    border-radius: 10px;
+    font-size: 15px;
+    color:white;
+    font-style: inherit;
+    border:10px;
+}
+.button:hover{
+    background-color: #000;
+
+} 
+/* *{
+    border:1px solid red;
+} */
+.form-control:focus {
+    border-color: #ced4da; /* default B5 color or set your own color*/
+    outline: none !important;
+  }  
+
+  table tr:nth-child(odd) td{
+    background:#ccc;
+}
+table tr:nth-child(even) td{
+     background:#fff;
+}

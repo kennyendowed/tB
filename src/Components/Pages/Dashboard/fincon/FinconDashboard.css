@@ -1,0 +1,18 @@
+.btn-variant{
+    background-color:#fbcf33 ;
+    color: white;
+  }
+  .page-item.active .page-link {
+    background-color: #fbcf33;
+    border-color: #fbcf33;
+  }
+  /* .btn-secondary{
+    background-color:#fbcf33 ;
+    color: white;
+  } */
+  table tr:nth-child(odd) td{
+    background:#ccc;
+}
+table tr:nth-child(even) td{
+     background:#fff;
+}

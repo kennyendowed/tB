@@ -1,0 +1,14 @@
+/* classnames */
+.action{
+    height: 80px !important;
+
+}
+
+.actionlogo{
+    height: 50px !important;
+
+}
+.card-body-b{
+    border-top-left-radius: 80px !important ;
+    border-top-right-radius: 80px !important ;
+}
