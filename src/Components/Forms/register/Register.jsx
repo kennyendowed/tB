@@ -1,89 +1,254 @@
-import React from "react";
-import { useNavigate ,Link} from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
 import "./Register.css";
-import logo from "../../../assets/img/logos/providus-logo.svg";
+import Terms from "../../../views/terms";
+import aboutUs from "../../../assets/welcome/assets/img/about/trustbank-about-us.avif"
+
 
 function Register() {
-	const navigate = useNavigate();
-	const { register, handleSubmit,   formState: { errors } } = useForm();
-	// const [username, setEmail] = useState("");
-	// const [password, setPassword] = useState("");
-	const onSubmit = (data) => {
-	    // console.log(data.email);
-		// console.log(data.username);
-		  try {
-		 AuthService.login(data.username, data.password).then(
-		  () => {
-			navigate("/dashboard");
-			window.location.reload();
-		  },
-		  (error) => {
-			const Msg = () => (
-				<div>
-					 <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-				<p> { error.response.data.data[0].message} </p> 
-				</div>
-			  )
-			toast.error(Msg, {
-				position: "top-right",
-				autoClose: 10000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-				});
-			console.log(error.response.data.data[0].message);
-		  }
-		);
-	  } catch (err) {
-		console.log(err);
-	  }
 
-	  };
-	//   console.log(errors);
-  
+    const [showTerm, setShowTerm] = useState(false);
 
-	
-	
-	// const handleLogin = async (e) => {
-	//   e.preventDefault();
-	//   try {
-	// 	await AuthService.login(username, password).then(
-	// 	  () => {
-	// 		navigate("/dashboard");
-	// 		window.location.reload();
-	// 	  },
-	// 	  (error) => {
-	// 		const Msg = () => (
-	// 			<div>
-	// 				 <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-	// 			<p> { error.response.data.data[0].message} </p> 
-	// 			</div>
-	// 		  )
-	// 		toast.error(Msg, {
-	// 			position: "top-right",
-	// 			autoClose: 10000,
-	// 			hideProgressBar: false,
-	// 			closeOnClick: true,
-	// 			pauseOnHover: true,
-	// 			draggable: true,
-	// 			progress: undefined,
-	// 			});
-	// 		console.log(error.response.data.data[0].message);
-	// 	  }
-	// 	);
-	//   } catch (err) {
-	// 	console.log(err);
-	//   }
-	// };
 
-	return (
-	<>
-			  <form onSubmit={handleSubmit(onSubmit)}>
+    const handleClose = () => {
+        setShowTerm(false);
+      };
+
+    // const navigate = useNavigate();
+    // const { register, handleSubmit,   formState: { errors } } = useForm();
+    // // const [username, setEmail] = useState("");
+    // // const [password, setPassword] = useState("");
+    // const onSubmit = (data) => {
+    //     // console.log(data.email);
+    // 	// console.log(data.username);
+    // 	  try {
+    // 	 AuthService.login(data.username, data.password).then(
+    // 	  () => {
+    // 		navigate("/dashboard");
+    // 		window.location.reload();
+    // 	  },
+    // 	  (error) => {
+    // 		const Msg = () => (
+    // 			<div>
+    // 				 <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+    // 			<p> { error.response.data.data[0].message} </p> 
+    // 			</div>
+    // 		  )
+    // 		toast.error(Msg, {
+    // 			position: "top-right",
+    // 			autoClose: 10000,
+    // 			hideProgressBar: false,
+    // 			closeOnClick: true,
+    // 			pauseOnHover: true,
+    // 			draggable: true,
+    // 			progress: undefined,
+    // 			});
+    // 		console.log(error.response.data.data[0].message);
+    // 	  }
+    // 	);
+    //   } catch (err) {
+    // 	console.log(err);
+    //   }
+
+    //   };
+
+
+    return (
+        <>
+
+            <section className="contact-area ptb-70">
+                <div className="container">
+                    <div className="section-title">
+                        <div className="bar"></div>
+                        <p>Please provide all required information</p>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-lg-5 col-md-12">
+                            <div className="contact-info">
+                                <div className="about-image">
+                                    <img src={aboutUs} alt="image" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-7 col-md-12">
+                            <div className="contact-form">
+                                <form id="contactForm">
+                                    <div className="row">
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    First Name <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="text" name="fname" id="fname" className="form-control" required data-error="Please enter your first name" placeholder="first Name" />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Middle Name <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="text" name="mname" id="mname" className="form-control" required data-error="Please enter your middle name" placeholder="Middle Name" />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Last Name <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="text" name="lname" id="lname" className="form-control" required data-error="Please enter your last name" placeholder="Last Name" />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Email <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="email" name="email" id="email" className="form-control" required data-error="Please enter your email" placeholder="Email" />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Phone number <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="text" name="phone_number" id="phone_number" required data-error="Please enter your number" className="form-control" placeholder="Phone number" />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                     Current Address <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="text" name="address" id="address" required data-error="Please enter your current address" className="form-control" placeholder="  Current Address" />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                      Valid Identification (PDF,JPEG, JPG, PNG) <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="file" name="vid" id="vid" required data-error="Please enter your   valid Identification (PDF,JPEG, JPG, PNG) " className="form-control" placeholder=" valid Identification (PDF,JPEG, JPG, PNG) " />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                      Signature (PDF,JPEG, JPG, PNG) <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="file" name="signature" id="signature" required data-error="Please enter your   Signature (PDF,JPEG, JPG, PNG) " className="form-control" placeholder=" Signature (PDF,JPEG, JPG, PNG) " />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                       Passport Photo (JPEG, JPG, PNG) <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="file" name="passportPhoto" id="passportPhoto" required data-error="Please enter your" className="form-control" placeholder=" Passport Photo (JPEG, JPG, PNG) " />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                                <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Religion <sup className="text-danger">*</sup>
+                                                </label>
+                                                <select
+                                                    className="form-control"
+                                                    id="exampleFormControlSelect2"
+                                                    name="religion"
+                                                    //   defaultValue={religion}
+                                                    //   onChange={(e) => setReligion(e.currentTarget.value)}
+                                                    required
+                                                >
+                                                    <option>Select your Religion</option>
+                                                    <option value="1">Christianity</option>
+                                                    <option value="2">Islam</option>
+                                                    <option value="4">Hindu</option>
+                                                    <option value="3">Others</option>
+                                                </select>
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <p>
+                                                <input
+                                                style={{ marginRight: "5px" }}
+                                                type="checkbox"
+                                                required={true}
+                                                // checked={agreementCheckBox}
+                                                // onChange={() => setAgreementCheckBox(!agreementCheckBox)}
+                                                />
+                                                I Agree to the
+                                                <a
+                                              
+                                                onClick={() => setShowTerm(true)}
+                                                style={{ color: "#efb331" }}
+                                                >
+                                                {" "}
+                                                Terms & Conditions
+                                                </a>
+                                            </p>
+
+
+
+
+                                        <div className="col-lg-12 col-md-12">
+                                            <button type="submit" className="btn btn-primary">Send Message</button>
+                                            <div id="msgSubmit" className="h3 text-center hidden"></div>
+                                            <div className="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <Terms showTerm={showTerm} handleClose={handleClose} />
+                </div>
+
+
+            </section>
+
+
+
+            {/* <form onSubmit={handleSubmit(onSubmit)}>
 			  <label>Username</label>
 					  <div className="mb-3">
             <input
@@ -140,12 +305,12 @@ function Register() {
                    
                   </p>
                 </div>
-      </form>
-	  </>
-		
-	
-        
-);
+      </form> */}
+        </>
+
+
+
+    );
 }
 
 export default Register

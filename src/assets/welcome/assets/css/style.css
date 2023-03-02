@@ -1410,7 +1410,7 @@ Main Banner Area CSS
 .banner-section {
   position: relative;
   z-index: 1;
-  background: transparent url(../img/shape-bg.png) left bottom no-repeat;
+  /* background: transparent url(../img/shape-bg.png) left bottom no-repeat; */
   padding-top: 160px;
 }
 
@@ -3818,7 +3818,7 @@ Account Create Area CSS
   opacity: .20;
   height: 100%;
   z-index: -1;
-  background-image: url(../img/bg_lines.svg);
+  /* background-image: url(../img/bg_lines.svg); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 200%;
@@ -4462,18 +4462,22 @@ Page Title Area CSS
   opacity: .04;
   height: 100%;
   z-index: -1;
-  background-image: url(../img/bg_lines.svg);
+  /* background-image: url(../img/bg_lines.svg); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 200%;
 }
 
 .page-title-area.item-bg1 {
-  background-image: url(../img/page-title-bg1.jpg);
+  /* background-image: url(../img/page-title-bg1.jpg); */
 }
 
 .page-title-area.item-bg2 {
-  background-image: url(../img/page-title-bg2.jpg);
+  /* background-image: url(../img/page-title-bg2.jpg); */
+}
+
+.page-title-area.item-Auth {
+  background-image: url(../img/6.jpg);
 }
 
 .page-title-content {
@@ -4501,7 +4505,7 @@ Page Title Area CSS
 }
 
 .page-title-section {
-  background: transparent url(../img/page-title-shape.jpg) right top no-repeat;
+  /* background: transparent url(../img/page-title-shape.jpg) right top no-repeat; */
   padding-top: 200px;
   padding-bottom: 120px;
 }
@@ -4775,15 +4779,15 @@ Widget Sidebar Area CSS
 }
 
 .widget-area .widget_luvion_posts_thumb .item .thumb .fullimage.bg1 {
-  background-image: url(../img/blog-image/1.jpg);
+  /* background-image: url(../img/blog-image/1.jpg); */
 }
 
 .widget-area .widget_luvion_posts_thumb .item .thumb .fullimage.bg2 {
-  background-image: url(../img/blog-image/2.jpg);
+  /* background-image: url(../img/blog-image/2.jpg); */
 }
 
 .widget-area .widget_luvion_posts_thumb .item .thumb .fullimage.bg3 {
-  background-image: url(../img/blog-image/3.jpg);
+  /* background-image: url(../img/blog-image/3.jpg); */
 }
 
 .widget-area .widget_luvion_posts_thumb .item .info {
@@ -5225,7 +5229,7 @@ Login Area CSS
 .login-image {
   height: 100%;
   width: 100%;
-  background-image: url(../img/login-bg.jpg);
+  /* background-image: url(../img/login-bg.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -5365,7 +5369,7 @@ Signup Area CSS
 .signup-image {
   height: 100%;
   width: 100%;
-  background-image: url(../img/signup-bg.jpg);
+  /* background-image: url(../img/signup-bg.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -6553,7 +6557,7 @@ Get Started Area CSS
   transition: 0.5s;
   -webkit-box-shadow: 0 0px 15px #2020203d;
           box-shadow: 0 0px 15px #2020203d;
-  background: white url("../img/sun.png");
+  /* background: white url("../img/sun.png"); */
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -6565,7 +6569,7 @@ Get Started Area CSS
 .dark-version input:checked + .slider:before {
   -webkit-transform: translateX(24px);
           transform: translateX(24px);
-  background: white url("../img/night-mode.png");
+  /* background: white url("../img/night-mode.png"); */
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -7206,7 +7210,7 @@ Fun Facts Area CSS
 }
 
 .funfacts-style-inner-box {
-  background-image: url(../img/home-six/funfacts-style-bg.jpg);
+  /* background-image: url(../img/home-six/funfacts-style-bg.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -7558,7 +7562,7 @@ Blog Area CSS
 Subscribe Wrap Area CSS
 =================================================*/
 .subscribe-wrap-inner-box {
-  background-image: url(../img/home-six/subscribe-wrap-bg.jpg);
+  /* background-image: url(../img/home-six/subscribe-wrap-bg.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -8240,7 +8244,7 @@ Navbar Area CSS
 Currency Transfer Provider Banner Area CSS
 =================================================*/
 .ctp-banner-area {
-  background-image: url(../img/currency-transfer-provider/banner/banner-bg.jpg);
+  /* background-image: url(../img/currency-transfer-provider/banner/banner-bg.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -8292,7 +8296,7 @@ Currency Transfer Provider Banner Area CSS
   content: "";
   left: 0;
   bottom: 0;
-  background-image: url(../img/currency-transfer-provider/banner/circle.png);
+  /* background-image: url(../img/currency-transfer-provider/banner/circle.png); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -8709,7 +8713,7 @@ Choose Area CSS
 }
 
 .ctp-choose-image {
-  background-image: url(../img/currency-transfer-provider/choose.jpg);
+  /* background-image: url(../img/currency-transfer-provider/choose.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -8971,7 +8975,7 @@ Key Features Area CSS
 }
 
 .ctp-key-features-tabs .tab-content .tab-pane .ctp-key-features-image {
-  background-image: url(../img/currency-transfer-provider/key-features.jpg);
+  /* background-image: url(../img/currency-transfer-provider/key-features.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -9116,7 +9120,7 @@ Working People Area CSS
 
 .ctp-working-people-image {
   display: inline-block;
-  background-image: url(../img/currency-transfer-provider/working-people/working-people.jpg);
+  /* background-image: url(../img/currency-transfer-provider/working-people/working-people.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -9196,7 +9200,7 @@ Protec Area CSS
 App Area CSS
 =================================================*/
 .ctp-app-area {
-  background-image: url(../img/currency-transfer-provider/app/app-bg.jpg);
+  /* background-image: url(../img/currency-transfer-provider/app/app-bg.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -9535,7 +9539,7 @@ FAQ Area CSS
   right: 30px;
   top: 25px;
   display: inline-block;
-  background-image: url(../img/currency-transfer-provider/arrow-circle-up.svg);
+  /* background-image: url(../img/currency-transfer-provider/arrow-circle-up.svg); */
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -9544,7 +9548,7 @@ FAQ Area CSS
 }
 
 .ctp-faq-accordion .accordion-item .accordion-button.collapsed::before {
-  background-image: url(../img/currency-transfer-provider/arrow-circle-down.svg);
+  /* background-image: url(../img/currency-transfer-provider/arrow-circle-down.svg); */
 }
 
 .ctp-faq-accordion .accordion-item .accordion-body {
@@ -9561,7 +9565,7 @@ FAQ Area CSS
 Page Banner Area CSS
 =================================================*/
 .ctp-page-banner-area {
-  background-image: url(../img/currency-transfer-provider/page-banner-bg.jpg);
+  /* background-image: url(../img/currency-transfer-provider/page-banner-bg.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -9642,7 +9646,7 @@ About Area CSS
 =================================================*/
 .ctp-about-image {
   display: inline-block;
-  background-image: url(../img/currency-transfer-provider/about.jpg);
+  /* background-image: url(../img/currency-transfer-provider/about.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -9883,7 +9887,7 @@ Investors Area CSS
 Send Money Online Area CSS
 =================================================*/
 .ctp-send-money-online-area {
-  background-image: url(../img/currency-transfer-provider/send-money-online-bg.jpg);
+  /* background-image: url(../img/currency-transfer-provider/send-money-online-bg.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -10445,7 +10449,7 @@ Currency Area CSS
 =================================================*/
 .ctp-currency-image {
   display: inline-block;
-  background-image: url(../img/currency-transfer-provider/currency.jpg);
+  /* background-image: url(../img/currency-transfer-provider/currency.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -10556,7 +10560,7 @@ World Area CSS
 
 .ctp-world-image {
   display: inline-block;
-  background-image: url(../img/currency-transfer-provider/world.jpg);
+  /* background-image: url(../img/currency-transfer-provider/world.jpg); */
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

@@ -142,6 +142,11 @@ const Navbar = (props) => {
                                 About Us  </Link>
                                 </li>
 
+                                <li className="nav-item">
+                                <Link to={"/faq"} className={location.pathname === '/faq' ? 'nav-link active':'nav-link'}>     
+                                FAQ's   </Link>
+                                </li>
+
 
                                 <li className="nav-item">
                                 <Link to={"/contact"} className={location.pathname === '/contact' ? 'nav-link active':'nav-link'}>     
