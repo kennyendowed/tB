@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { toast } from 'react-toastify';
-import { useForm } from 'react-hook-form';
-import AuthService from "../../../core/services/auth.service";
+import React, {  useState, } from "react";
+// import { useNavigate, Link } from "react-router-dom";
+// import { toast } from 'react-toastify';
+// import { useForm } from 'react-hook-form';
+// import AuthService from "../../../core/services/auth.service";
 import "./Register.css";
 import Terms from "../../../views/terms";
 import aboutUs from "../../../assets/welcome/assets/img/about/trustbank-about-us.avif"

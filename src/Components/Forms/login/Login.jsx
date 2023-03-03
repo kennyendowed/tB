@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
-import LoadingSpinner from "../../../Components/spinner";
+// import LoadingSpinner from "../../../Components/spinner";
 import LoadingLogo from "../../LoadingLogo";
 import "./Login.css";
 // import background from "../../../assets/img/curved-images/curved6.jpg";
  import logo from "../../../assets/img/logos/providus-logo.svg";
-import { display } from "@mui/system";
+// import { display } from "@mui/system";
 
 
 function Login() {
 	const navigate = useNavigate();
-	const { register, handleSubmit, formState: { errors,isSubmitting, isDirty, isValid} } = useForm({ mode: "onChange" });
+	const { register, handleSubmit, formState: { errors, isDirty, isValid} } = useForm({ mode: "onChange" });
 	const [showPassword, setShowPassword] = useState(false)
 	const [showLoader, setisLoader] = useState(false)
 	// const [username, setEmail] = useState("");
@@ -42,7 +42,7 @@ function Login() {
 		
 				if (typeof  ex.response?.data?.data != 'string') {
 				  for (let err in  ex.response?.data?.data) {
-					// console.log(err);
+					 console.log(err);
 					let Msg = () => (
 						<div>
 							 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
@@ -68,7 +68,7 @@ function Login() {
 // 	}, 2000);
 // });
 	  } catch (err) {
-		// console.log(err);
+		 console.log(err);
 	  }
 
 	  };
