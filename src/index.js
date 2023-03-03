@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {HashRouter} from 'react-router-dom'
+import {HashRouter,BrowserRouter} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css'; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -17,12 +17,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
    <React.StrictMode>
-    <HashRouter>
+    {/* <HashRouter>
     <App />
-    </HashRouter>
-        {/* <BrowserRouter>
+    </HashRouter> */}
+        <BrowserRouter>
        <App />
-    </BrowserRouter>  */}
+    </BrowserRouter> 
  </React.StrictMode>
 );
 

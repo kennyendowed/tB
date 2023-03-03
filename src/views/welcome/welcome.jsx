@@ -96,10 +96,10 @@ import { useNavigate, Link,useLocation } from "react-router-dom";
                 <div className="overview-box">
                     <div className="overview-image">
                         <div className="image">
-                            <img src={img2} alt="image" />
+                            <img src={img2} alt="" />
 
                             <div className="circle-img">
-                                <img src={img2} alt="image" />
+                                <img src={img2} alt="" />
                             </div>
                         </div>
                     </div>
