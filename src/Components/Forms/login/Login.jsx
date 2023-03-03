@@ -8,7 +8,7 @@ import LoadingLogo from "../../LoadingLogo";
 import "./Login.css";
 // import background from "../../../assets/img/curved-images/curved6.jpg";
  import logo from "../../../assets/img/logos/providus-logo.svg";
-// import { display } from "@mui/system";
+ import aboutUs from "../../../assets/welcome/assets/img/about/trustbank-about-us.avif"
 
 
 function Login() {
@@ -77,8 +77,28 @@ function Login() {
 
 	return (
 	<>
-	
-			  <form className = "form"onSubmit={handleSubmit(onSubmit)}>
+	  <section className="contact-area ptb-70">
+                <div className="container">
+                    <div className="section-title">
+                        <div className="bar"></div>
+                        <p>Please provide all required information</p>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-lg-5 col-md-12">
+                            <div className="contact-info">
+                                <div className="about-image">
+                                    <img src={aboutUs} alt="image" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-7 col-md-12">
+                            <div className="contact-form">
+
+							                        
+
+			  <form className="contactForm" onSubmit={handleSubmit(onSubmit)}>
 				  <label>Username</label>
 					  <div className="mb-3">
                           <input
@@ -93,7 +113,7 @@ function Login() {
                          />
 						  <p className="error-color">{errors.username?.message}</p>
                       </div>
-                     {/* <p className="error-color">{errors.username?.message}</p> */}
+                      <p className="error-color">{errors.username?.message}</p> 
 		            <label>Password</label>
 			        <div className="mb-3 relative password-field">
                        <input
@@ -118,7 +138,25 @@ function Login() {
 			</div>
           </div>
           <p className="error-color">{errors.password?.message}</p>
-		  <div className="text-center">
+		  <div className="col-lg-12 col-md-12">
+		  {!showLoader ? 
+		              (
+                      <button type="submit" className="btn-lg btn-primary border-0 bg-gradient-info w-100 h-80 mt-4 login_button mb-0"  disabled={!isDirty || !isValid}>LOG IN</button>
+                      ) : (
+
+                        <button
+                          className="btn-lg btn-primary bg-gradient-info border-0 w-100 login_button h-40 mt-4 mb-0"
+                          disabled
+                        >
+							<LoadingLogo />
+                     
+                        </button>
+                      )
+					  } 
+					
+                                        <div className="clearfix"></div>
+                                        </div>
+		  {/* <div className="text-center">
 		 
 		  {!showLoader ? 
 		              (
@@ -130,14 +168,23 @@ function Login() {
                           disabled
                         >
 							<LoadingLogo />
-                        {/* <LoadingSpinner/>  */}
+                     
                         </button>
                       )
 					  }
 						
-					  </div>
+					  </div> */}
 					
       </form>
+	  </div>
+                        </div>
+                    </div>
+                 
+					</div>
+
+
+            </section>
+
 	  </>
 		
 
