@@ -1,0 +1,53 @@
+.toaster-brand-img {
+    max-width: 100%;
+    max-height: 2rem;
+}
+.error-color {
+    color:red
+  }
+
+
+.bg-gradient-info {
+    background-image: linear-gradient(321deg, #fbbf0e, #ecb91e);
+}
+/* .input{
+    width:300px;
+    height: 65px;
+} */
+/* .input_password{
+    height:30px;
+    width:200px;
+} */
+ .login_input{
+   height:50px;
+   border-radius: 2px ;
+
+} 
+ .login_button{
+    border-radius: 2px ;
+     
+
+} 
+
+
+/* tags */
+button:hover{
+    background-color: #0000;
+    
+}
+
+.password-field {
+    position: relative;
+}
+
+.icon-container {
+    position: absolute;
+     right: 10px;
+     top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 300ms ease-in-out; 
+}
+
+.icon-container:active {
+    opacity: 0.65;
+}
