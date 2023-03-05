@@ -1,26 +1,38 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import {React,useState} from "react";
 import "./Sidebar.css";
 import { useNavigate, Link,useLocation } from "react-router-dom";
-import logo from "../../../assets/img/logos/providus-logo.svg";
+import logo from "../../../assets/welcome/assets/img/logo.jpg";
 import {useAuthContext,AuthContextProvider} from "../../../core/modules";
 import AuthService from "../../../core/services/auth.service";
+
+
+
+
 
 const Sidebar = (props) => {
   const navigate = useNavigate();
   const location = useLocation()
-  const { currentUser , logout } = useAuthContext();
+  const { currentUser , logout ,hamburger } = useAuthContext();
+  const [toggleMenu, settoggle] = useState(false);
+  
   const logOut = () => {
     AuthService.logout();
     logout();
     navigate("/auth");
     // window.location.reload();
   };
-
+  function toogleDropdownbottonState() {
+    if (toggleMenu) {
+        settoggle(false)
+  
+     } else {
+        settoggle(true)
+          }
+       }
     return (
       <>
       {/* {currentUser && ( */}
-       <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+       {/* <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
          <div className="sidenav-header">
               <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 ps ps--active-y bg-white " id="sidenav-main">
               <div className="sidenav-header"> 
@@ -35,7 +47,7 @@ const Sidebar = (props) => {
                  <ul className="navbar-nav">
                       <li className="nav-item">
                           <Link to={"/"} className={location.pathname === '/dashboard' ? 'nav-link active':'nav-link'}>                  
-                                {/* <a className="nav-link  active" href="/"> */}
+                               <a className="nav-link  active" href="/"> 
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                  <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -66,9 +78,9 @@ const Sidebar = (props) => {
         <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
                     <g transform="translate(1716.000000, 291.000000)">
                       <g transform="translate(1.000000, 0.000000)">
-                        <path class="color-background opacity-6" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
-                        <path class="color-background" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
-                        <path class="color-background" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
+                        <path className="color-background opacity-6" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
+                        <path className="color-background" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
+                        <path className="color-background" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
                       </g>
                     </g>
                   </g>
@@ -131,8 +143,64 @@ const Sidebar = (props) => {
     </div>
     </aside>
    </div>
-  </aside>
+  </aside> */}
+	<nav id="sidebar" className={!hamburger ?"sidebar" : "sidebar toggled"}>
+      <Link to={"/"} className="sidebar-brand" >
+                                <img src={logo} alt="logo" />
+                                </Link>
+			<div className="sidebar-content">
+				<div className="sidebar-user">
+					<img src="img/avatars/avatar.jpg" className="img-fluid rounded-circle mb-2" alt="Linda Miller" />
+					<div className="fw-bold">Linda Miller</div>
+					<small>Front-end Developer</small>
+				</div>
 
+				<ul className="sidebar-nav">
+					<li className="sidebar-item active">
+						<a  className="sidebar-link">
+							<i className="align-middle me-2 fas fa-fw fa-home"></i> <span className="align-middle">Dashboards</span>
+						</a>
+						
+					</li>
+          {/* {currentUser.roleaccess.includes('fincon') && ( 
+              <> */}
+	               <li className="sidebar-item">
+                  <a  className="sidebar-link collapsed">
+                    <i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Fund || Debit Accounts</span>
+                  </a>
+					    	</li>
+
+              {/* </>
+           )}   */}
+					<li className="sidebar-item">
+						<a  className="sidebar-link collapsed">
+							<i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Transfer Money</span>
+						</a>
+						</li>
+            <li className="sidebar-item">
+						<a className="sidebar-link" href="tables-bootstrap.html">
+							<i className="align-middle me-2 fas fa-fw fa-list"></i> <span className="align-middle">Transactions</span>
+						</a>
+					</li>
+          <li className="sidebar-item">
+						<a data-bs-toggle="collapse" onClick={() => toogleDropdownbottonState()} className={ !toggleMenu ? "sidebar-link" : "sidebar-link collapsed"}>
+							<i className="align-middle me-2 fas fa-fw fa-flask"></i> <span className="align-middle">Settings</span>
+						</a>
+						<ul id="ui" className={ !toggleMenu ?  "sidebar-dropdown list-unstyled collapse " : "sidebar-dropdown list-unstyled collapse show"} data-bs-parent="#sidebar">
+            <li className="sidebar-item"><a className="sidebar-link" href="ui-buttons.html">Update Profile</a></li>
+            <li className="sidebar-item"><a className="sidebar-link" href="ui-alerts.html">Change Password</a></li>
+											
+						</ul>
+					</li>
+					<li className="sidebar-item">
+						<a onClick={logOut} className="sidebar-link collapsed">
+							<i className="align-middle me-2 fas fa-fw fa-sign-in-alt"></i> <span className="align-middle">Sign out</span>
+						</a>
+					
+					</li>			
+				</ul>
+			</div>
+		</nav>
   </>
   )
   }

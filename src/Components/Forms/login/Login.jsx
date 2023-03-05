@@ -25,51 +25,51 @@ function Login() {
 	const onSubmit =async (data) => {
 	    // console.log(data.email);
 		// console.log(data.username);
-		  try {
-			// return new Promise((resolve) => {
-			// 		setTimeout(() => {
-			//   resolve();	
-			setisLoader(true)	
-		 AuthService.login(data.username, data.password).then(
-		  () => {
-			setisLoader(false)	
-			navigate("/dashboard");
-			 window.location.reload();
-		  },
-		  (ex) => {
-			setisLoader(false)	
-			// console.log(ex);
+// 		  try {
+// 			// return new Promise((resolve) => {
+// 			// 		setTimeout(() => {
+// 			//   resolve();	
+// 			setisLoader(true)	
+// 		 AuthService.login(data.username, data.password).then(
+// 		  () => {
+// 			setisLoader(false)	
+ 			navigate("/dashboard");
+// 			 window.location.reload();
+// 		  },
+// 		  (ex) => {
+// 			setisLoader(false)	
+// 			// console.log(ex);
 		
-				if (typeof  ex.response?.data?.data != 'string') {
-				  for (let err in  ex.response?.data?.data) {
-					 console.log(err);
-					let Msg = () => (
-						<div>
-							 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
-						<p> { ex?.response?.data?.data[0]?.message} </p> 
-						</div>
-					  )
-					toast.error(Msg, {
-						position: "top-right",
-						autoClose: 10000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-						});
-				   // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
-				  }
-				}
+// 				if (typeof  ex.response?.data?.data != 'string') {
+// 				  for (let err in  ex.response?.data?.data) {
+// 					 console.log(err);
+// 					let Msg = () => (
+// 						<div>
+// 							 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+// 						<p> { ex?.response?.data?.data[0]?.message} </p> 
+// 						</div>
+// 					  )
+// 					toast.error(Msg, {
+// 						position: "top-right",
+// 						autoClose: 10000,
+// 						hideProgressBar: false,
+// 						closeOnClick: true,
+// 						pauseOnHover: true,
+// 						draggable: true,
+// 						progress: undefined,
+// 						});
+// 				   // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
+// 				  }
+// 				}
 			
-			// console.log(ex.response.data.data[0].message);
-		  }
-		);
-// 	}, 2000);
-// });
-	  } catch (err) {
-		 console.log(err);
-	  }
+// 			// console.log(ex.response.data.data[0].message);
+// 		  }
+// 		);
+// // 	}, 2000);
+// // });
+// 	  } catch (err) {
+// 		 console.log(err);
+// 	  }
 
 	  };
 	
@@ -141,7 +141,7 @@ function Login() {
 		  <div className="col-lg-12 col-md-12">
 		  {!showLoader ? 
 		              (
-                      <button type="submit" className="btn-lg btn-primary border-0 bg-gradient-info w-100 h-80 mt-4 login_button mb-0"  disabled={!isDirty || !isValid}>LOG IN</button>
+                      <button type="submit" className="btn-lg btn-primary border-0 bg-gradient-info w-100 h-80 mt-4 login_button mb-0" >LOG IN</button> // disabled={!isDirty || !isValid}
                       ) : (
 
                         <button

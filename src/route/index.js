@@ -11,7 +11,7 @@ import ProtectedRoutes from "../Components/AuthGuard/ProtectedRoutes.jsx"
 import PublicRoutes from "../Components/AuthGuard/PublicRoutes"
 import PermissionDenied from "../views/PermissionDenied"
 import InnerContent from "../Components/InnerContent"
-// import DashboardPage from "../views/dashboard"
+import DashboardPage from "../views/dashboard"
 import LoginPage from "../views/authentication"
 // import TreatedRequest from "../Components/Pages/Dashboard/TreatedRequest/TreatedRequest.jsx";
 // import Reports from "../Components/Pages/Dashboard/Reports/Reports.jsx";
@@ -28,12 +28,16 @@ const MainRoutes = () => (
 	<Routes>
 		{/** Protected Routes */}
 		{/** Wrap all Route under ProtectedRoutes element */}
+		<Route path="/dashboard" element={<DashboardPage />} >
+				  <Route path="/dashboard/treated" element={<DashboardPage />} /> 
+				</Route>
+				
 		<Route path="/" element={<ProtectedRoutes />}>
 			<Route path="/" element={<InnerContent />}>
             <Route path="/" element={<Navigate replace to="dashboard" />} />
-				{/* <Route path="/dashboard" element={<DashboardPage />} >
-				  {/* <Route path="/dashboard/treated" element={<DashboardPage />} /> 
-				</Route> */}
+				<Route path="/dashboard" element={<DashboardPage />} >
+				  <Route path="/dashboard/treated" element={<DashboardPage />} /> 
+				</Route>
 				{/* <Route path = "/Treatedrequests" element ={<TreatedRequest/>}/>
 				<Route path = "/Reports" element ={<Reports/>}/>
 				<Route path = "/BatchApproval" element ={<BatchApproval/>}/> */}

@@ -1,10 +1,1 @@
-.centerText {
-    text-align: center;
-    color: #fdb813;
-    font-size: 14px;
-    margin-left: -10px;   
-  }
-
-  .navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
-    background-image: linear-gradient(310deg, #fdb813 0%, #fdb813 100%);
-}
+@import  "../../../assets/dashboard/css/modern.css";
