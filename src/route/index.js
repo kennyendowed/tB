@@ -34,7 +34,7 @@ const MainRoutes = () => (
 		<Route path = "/transferFunds" element ={<TransferFunds/>}/>
 		<Route path = "/Transactions" element ={<Transactions/>}/>
 				
-		{/* <Route path="/" element={<ProtectedRoutes />}>
+		<Route path="/" element={<ProtectedRoutes />}>
 			<Route path="/" element={<InnerContent />}>
             <Route path="/" element={<Navigate replace to="dashboard" />} />
 				{/* <Route path="/dashboard" element={<DashboardPage />} >
@@ -43,9 +43,9 @@ const MainRoutes = () => (
 				{/* <Route path = "/addFunds" element ={<addFunds/>}/> */}
 				{/* <Route path = "/Treatedrequests" element ={<TreatedRequest/>}/>
 				<Route path = "/Reports" element ={<Reports/>}/>
-				<Route path = "/BatchApproval" element ={<BatchApproval/>}/> 
+				<Route path = "/BatchApproval" element ={<BatchApproval/>}/>  */}
 			</Route>
-			</Route> */}
+			</Route>
 	
 
 		{/** Public Routes */}
