@@ -156,32 +156,28 @@ const Sidebar = (props) => {
 				</div>
 
 				<ul className="sidebar-nav">
-					<li className="sidebar-item active">
-						<a  className="sidebar-link">
-							<i className="align-middle me-2 fas fa-fw fa-home"></i> <span className="align-middle">Dashboards</span>
-						</a>
-						
+          <li className={location.pathname === '/dashboard' ? 'sidebar-item  active':'sidebar-item'}>
+          <Link to={"/dashboard"} className="sidebar-link"> 	<i className="align-middle me-2 fas fa-fw fa-home"></i> <span className="align-middle">Dashboards</span>      </Link>  
+											
 					</li>
           {/* {currentUser.roleaccess.includes('fincon') && ( 
               <> */}
-	               <li className="sidebar-item">
-                  <a  className="sidebar-link collapsed">
-                    <i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Fund || Debit Accounts</span>
-                  </a>
+	               <li className={location.pathname === '/addFunds' ? 'sidebar-item  active':'sidebar-item'}>
+                 <Link to={"/addFunds"} className="sidebar-link"> 	   <i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Fund || Debit Accounts</span>    </Link>  
+                 
 					    	</li>
 
               {/* </>
            )}   */}
-					<li className="sidebar-item">
-						<a  className="sidebar-link collapsed">
-							<i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Transfer Money</span>
-						</a>
-						</li>
-            <li className="sidebar-item">
-						<a className="sidebar-link" href="tables-bootstrap.html">
-							<i className="align-middle me-2 fas fa-fw fa-list"></i> <span className="align-middle">Transactions</span>
-						</a>
-					</li>
+              <li className={location.pathname === '/transferFunds' ? 'sidebar-item  active':'sidebar-item'}>
+                 <Link to={"/transferFunds"} className="sidebar-link"> 	  	<i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Transfer Money</span>  </Link>  
+                 
+					    	</li>
+                <li className={location.pathname === '/Transactions' ? 'sidebar-item  active':'sidebar-item'}>
+                 <Link to={"/Transactions"} className="sidebar-link"> 	  		<i className="align-middle me-2 fas fa-fw fa-list"></i> <span className="align-middle">Transactions</span>  </Link>  
+                 
+					    	</li>
+         
           <li className="sidebar-item">
 						<a data-bs-toggle="collapse" onClick={() => toogleDropdownbottonState()} className={ !toggleMenu ? "sidebar-link" : "sidebar-link collapsed"}>
 							<i className="align-middle me-2 fas fa-fw fa-flask"></i> <span className="align-middle">Settings</span>
