@@ -12,6 +12,7 @@ import PublicRoutes from "../Components/AuthGuard/PublicRoutes";
 import PermissionDenied from "../views/PermissionDenied";
 import InnerContent from "../Components/InnerContent";
 import DashboardPage from "../views/dashboard";
+import SettingsPage from "../views/settings";
 import AddFunds from "../Components/Pages/AddFunds";
 import TransferFunds from "../Components/Pages/TransferFunds";
 import Transactions from "../Components/Pages/Transactions";
@@ -33,6 +34,10 @@ const MainRoutes = () => (
 		<Route path = "/addFunds" element ={<AddFunds/>}/>
 		<Route path = "/transferFunds" element ={<TransferFunds/>}/>
 		<Route path = "/Transactions" element ={<Transactions/>}/>
+		<Route path="/settings" element={<SettingsPage />} >
+				  <Route path="/settings/update-Profile" element={<SettingsPage />} /> 
+				  <Route path="/settings/update-Password" element={<SettingsPage />} /> 
+				</Route> 
 				
 		<Route path="/" element={<ProtectedRoutes />}>
 			<Route path="/" element={<InnerContent />}>
