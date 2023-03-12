@@ -61,8 +61,10 @@ import { useNavigate, Link,useLocation } from "react-router-dom";
   <div className="page-title-area item-bg1 jarallax" data-jarallax='{"speed": 0.3}'>
             <div className="container">
                 <div className="page-title-content">
-                <h2>FAQ</h2>
-                    <p>Frequently Asked Questions</p>
+               
+                <h2>Frequently Asked Questions</h2>
+                            <div className="bar"></div>
+                            <p>Find answers to all your queries about our service</p>
                 </div>
             </div>
         </div>
@@ -72,9 +74,7 @@ import { useNavigate, Link,useLocation } from "react-router-dom";
                 <div className="row">
                     <div className="col-lg-5 col-md-12">
                         <div className="faq-content">
-                            <h2>Frequently Asked Questions</h2>
-                            <div className="bar"></div>
-                            <p>Find answers to all your queries about our service</p>
+                           
 
                             <div className="faq-image">
                                 <img src={faqImg} alt="image" />
