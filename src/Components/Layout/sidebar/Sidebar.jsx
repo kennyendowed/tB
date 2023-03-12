@@ -183,8 +183,10 @@ const Sidebar = (props) => {
 							<i className="align-middle me-2 fas fa-fw fa-flask"></i> <span className="align-middle">Settings</span>
 						</a>
 						<ul id="ui" className={ !toggleMenu ?  "sidebar-dropdown list-unstyled collapse " : "sidebar-dropdown list-unstyled collapse show"} data-bs-parent="#sidebar">
-            <li className="sidebar-item"><a className="sidebar-link" href="ui-buttons.html">Update Profile</a></li>
-            <li className="sidebar-item"><a className="sidebar-link" href="ui-alerts.html">Change Password</a></li>
+            <li className="sidebar-item">
+              <Link to={"/settings/update-Profile"}  className="sidebar-link" >Update Profile </Link>
+              </li>
+            <li className="sidebar-item">  <Link to={"/settings/update-Password"}  className="sidebar-link" >Change Password </Link></li>
 											
 						</ul>
 					</li>

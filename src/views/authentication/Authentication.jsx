@@ -1,5 +1,5 @@
 import React from "react"
-import {useLocation} from "react-router-dom"
+import {useLocation} from "react-router-dom";
 import background from "../../assets/img/curved-images/slide2.png";
 import logo from "../../assets/img/logos/providus-logo.svg";
 import "./Authentication.css";
