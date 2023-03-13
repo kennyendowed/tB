@@ -112,7 +112,32 @@ function Register() {
                                                 <div className="help-block with-errors"></div>
                                             </div>
                                         </div>
-
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Gender <sup className="text-danger">*</sup>
+                                                </label>
+                                                <select className="form-control" name="email">
+                                                <option value="">-- Select Gender --</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                </select>
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Dirth Of Birth <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="date" name="dob" id="dob" className="form-control" required data-error="Please provide date of birth"  />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
                                         <div className="col-lg-6 col-md-6">
                                             <div className="form-group">
                                             <label
@@ -133,18 +158,6 @@ function Register() {
                                                     Phone number <sup className="text-danger">*</sup>
                                                 </label>
                                                 <input type="text" name="phone_number" id="phone_number" required data-error="Please enter your number" className="form-control" placeholder="Phone number" />
-                                                <div className="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-
-                                        <div className="col-lg-6 col-md-6">
-                                            <div className="form-group">
-                                            <label
-                                                //className={religion != "" ? "" : "text-danger"}
-                                                >
-                                                     Current Address <sup className="text-danger">*</sup>
-                                                </label>
-                                                <input type="text" name="address" id="address" required data-error="Please enter your current address" className="form-control" placeholder="  Current Address" />
                                                 <div className="help-block with-errors"></div>
                                             </div>
                                         </div>
@@ -183,6 +196,34 @@ function Register() {
                                                 <div className="help-block with-errors"></div>
                                             </div>
                                         </div>
+                                        
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Country <sup className="text-danger">*</sup>
+                                                </label>
+                                                <select className="form-control" name="email">
+                                                <option value="">-- Select Country --</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                </select>
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-lg-6 col-md-6">
+                                            <div className="form-group">
+                                            <label
+                                                //className={religion != "" ? "" : "text-danger"}
+                                                >
+                                                    Current Address <sup className="text-danger">*</sup>
+                                                </label>
+                                                <input type="text" name="address" id="address" required data-error="Please enter your current address" className="form-control" placeholder="  Current Address" />
+                                                <div className="help-block with-errors"></div>
+                                            </div>
+                                        </div>
 
                                         <div className="col-lg-6 col-md-6">
                                             <div className="form-group">
@@ -200,10 +241,10 @@ function Register() {
                                                     required
                                                 >
                                                     <option>Select your Religion</option>
-                                                    <option value="1">Christianity</option>
-                                                    <option value="2">Islam</option>
-                                                    <option value="4">Hindu</option>
-                                                    <option value="3">Others</option>
+                                                    <option value="Christianity">Christianity</option>
+                                                    <option value="Islam">Islam</option>
+                                                    <option value="Hindu">Hindu</option>
+                                                    <option value="Others">Others</option>
                                                 </select>
                                                 <div className="help-block with-errors"></div>
                                             </div>
