@@ -52,9 +52,19 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const CreateAccount = async(payload) => {
+  // console.log(JSON.stringify(payload));
+   return axios.post(API_URL2 + "auth/CreateAccount",payload, {
+ //  'Content-Type': 'multipart/form-data'
+  //  "Content-Type": "application/json"
+  })
+  .then((response) => {
+      return response.data;
+  });
+}
 const authService = {
   login,GetCountryInfo,
-  logout,
+  logout,CreateAccount,
   getCurrentUser,
 };
 
