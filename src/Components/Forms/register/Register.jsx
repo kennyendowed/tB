@@ -26,7 +26,7 @@ const INITIAL_FORM_STATE = {
   };
   const INITIAL_FORM_VALIDITY = {
     first_name: false,
-    middle_name: false,
+    middle_name: true,
     address: false,
     dob: false,
     country: false,
