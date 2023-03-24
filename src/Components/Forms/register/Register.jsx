@@ -10,7 +10,7 @@ import "./Register.css";
 import Terms from "../../../views/terms";
 import aboutUs from "../../../assets/welcome/assets/img/about/trustbank-about-us.avif"
 const INITIAL_FORM_STATE = {
-    first_name: "",
+        first_name: "",
         middle_name: "",
         address: "",
         dob: "",
@@ -24,12 +24,28 @@ const INITIAL_FORM_STATE = {
         Documentsignature: null,
         passportPhoto: null
   };
+  const INITIAL_FORM_VALIDITY = {
+    first_name: false,
+    middle_name: false,
+    address: false,
+    dob: false,
+    country: false,
+    religion: false,
+    email: false,
+    gender: false,
+    phone: false,
+    last_name: false,
+    Documentvid: false,
+    Documentsignature: false,
+    passportPhoto: false,
+  };
 
 function Register() {
     const API_URL2 = process.env.REACT_APP_BaseApi_URL;
     const navigate = useNavigate();
-	const { register, handleSubmit, formState: { errors,isSubmitting, isDirty, isValid} } = useForm({ mode: "onChange" });
+	//const { register, handleSubmit, formState: { errors,isSubmitting, isDirty, isValid} } = useForm({ mode: "onChange" });
     const [showTerm, setShowTerm] = useState(false);
+    const [formValidity, setFormValidity] = useState(INITIAL_FORM_VALIDITY);
 	const [showPassword, setShowPassword] = useState(false);
 	const [showLoader, setLoading] = useState(false);
     const [GetcountryInfo, setcountryInfo] = useState([]);
@@ -46,13 +62,19 @@ function Register() {
       const handleInputChange = (event) => {
         const { name, value, type } = event.target;
         const inputValue = type === 'file' ? event.target.files[0] : value;
-    
+        const isValid = event.target.value.length > 0;
         setFormdata({
           ...formDataToSend,
           [name]: inputValue
         });
-      };
 
+      
+        setFormValidity((prevValidity) => ({
+          ...prevValidity,
+          [name]: isValid,
+        }));
+      };
+    
     //   const handleInputChange = (event) => {
     //     const { name, value } = event.target;
     //     setFormData({ ...formData, [name]: value });
@@ -103,86 +125,171 @@ function Register() {
 //  console.log(formDataToSend)
 //  console.log(formData)
 try {
-    AuthService.CreateAccount(formData).then(
-        (response) => {
-            console.log(response.data[0]) 
-            if(response.data[0].code === 200){
-    let resMessage= (response.data[0].message) ? response.data[0].message : response.message
-                // console.log(response.data[0].data);
-                // const data = response.data[0].data
-                // console.log(data.manufacturedYear)
-                // setItems(response.data);
-                let Msg = () => (
-                    <div>
-                        <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-                        <p>  {resMessage} </p>
-                    </div>
-                )
-                toast.success(Msg, {
-                    position: "top-right",
-                    autoClose: 10000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-                setLoading(false)
-            }
+    const response = await AuthService.CreateAccount(formData);
+    if (response.data[0].code === 200) {
+      const resMessage = response.data[0].message || response.message;
+      const Msg = () => (
+        <div>
+          <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+          <p> {resMessage} </p>
+        </div>
+      );
+      toast.success(Msg, {
+        position: "top-right",
+        autoClose: 10000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setLoading(false);
+    }
+}  catch (ex) {
+   // console.log(ex.response.data.status)
+    console.log(ex)
+    //  console.log( ex.response.data.data[0].message )
+    setLoading(false);
+   // console.log(ex)
+    // let exresMessage =
+    //   ex.response?.data?.data[0]?.message ||
+    //   ex.message ||
+    //   ex.response?.data?.error?.message;
+  
+    switch (ex.code || ex.response?.data?.status) {
+      case "ERR_NETWORK":
+        case "ERR_BAD_RESPONSE":
+        const Msg1 = () => (
+          <div>
+            <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+            <p> {ex.response?.data?.error?.message} </p>2
+            <p>{ ex.message }</p>
+          </div>
+        );
+        toast.error(Msg1, {
+          position: "top-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        break;
+      case "FALSE":        
+      case "ERR_BAD_REQUEST":
+        const Msg2 = () => (
+          <div>
+            <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+            <p>  ❌ {ex.response.data.data[0].message}  ❌ </p>
+            {/* <p>
+              ❌ {exresMessage} {ex.response?.data?.error?.message} ❌
+            </p> */}
+          </div>
+        );
+        toast.error(Msg2, {
+          position: "top-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        break;
+      default:
+        console.log(ex);
+        break;
+    } 
+}
+
+  
+
+
+    // .then(
+    //     (response) => {
+    //         console.log(response.data[0]) 
+    //         if(response.data[0].code === 200){
+    // let resMessage= (response.data[0].message) ? response.data[0].message : response.message
+    //             // console.log(response.data[0].data);
+    //             // const data = response.data[0].data
+    //             // console.log(data.manufacturedYear)
+    //             // setItems(response.data);
+    //             let Msg = () => (
+    //                 <div>
+    //                     <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+    //                     <p>  {resMessage} </p>
+    //                 </div>
+    //             )
+    //             toast.success(Msg, {
+    //                 position: "top-right",
+    //                 autoClose: 10000,
+    //                 hideProgressBar: false,
+    //                 closeOnClick: true,
+    //                 pauseOnHover: true,
+    //                 draggable: true,
+    //                 progress: undefined,
+    //             });
+    //             setLoading(false)
+    //         }
             
-        }  , 
-            (ex) => {
-                setLoading(false)
-                console.log(ex.response.data) 
-                    if (ex.code === "ERR_NETWORK") {
-                        let Msg = () => (
-                            <div>
-                                <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-                                <p> {ex.message} </p>
-                            </div>
-                        )
-                        toast.error(Msg, {
-                            position: "top-right",
-                            autoClose: 10000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
+    //     }  , 
+    //         (ex) => {
+    //             setLoading(false)
+    //             console.log(ex)
+    //             console.log(ex.code)
+    //             let exresMessage= (ex.response.data.data[0].message) ? ex.response.data.data[0].message  : ex.message  ? ( ex.response.data.error.message) : ex.response.data.error.message 
+             
+    //             console.log(exresMessage) 
+    //                 if (ex.code === "ERR_NETWORK" || ex.code ==="ERR_BAD_REQUEST") {
+    //                     let Msg = () => (
+    //                         <div>
+    //                             <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+    //                             <p> {exresMessage} </p>
+    //                         </div>
+    //                     )
+    //                     toast.error(Msg, {
+    //                         position: "top-right",
+    //                         autoClose: 10000,
+    //                         hideProgressBar: false,
+    //                         closeOnClick: true,
+    //                         pauseOnHover: true,
+    //                         draggable: true,
+    //                         progress: undefined,
+    //                     });
                        
-                    }
+    //                 }
     
-                    if (ex.response.data.status === "FALSE") {
-                        console.log(ex.response.data.data[0].message) 
-                        let Msg = () => (
-                            <div>
-                                <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-                                <p> {ex.message}  </p>
-                                <p>❌ {ex.response.data.data[0].message} ❌</p>
-                            </div>
-                        )
-                        toast.error(Msg, {
-                            position: "top-right",
-                            autoClose: 10000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                        });
-                    }
+    //                 if (ex.code ==="ERR_BAD_RESPONSE" || ex.response.data.status === "FALSE") {
+    //                     // console.log(ex.response.data.data[0].message) 
+    //                     let Msg = () => (
+    //                         <div>
+    //                             <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+    //                             <p> {ex.message}  </p>
+    //                             <p>❌ {exresMessage} {ex.response?.data?.error?.message }❌</p>
+    //                         </div>
+    //                     )
+    //                     toast.error(Msg, {
+    //                         position: "top-right",
+    //                         autoClose: 10000,
+    //                         hideProgressBar: false,
+    //                         closeOnClick: true,
+    //                         pauseOnHover: true,
+    //                         draggable: true,
+    //                         progress: undefined,
+    //                     });
+    //                 }
                  
                     
-                }
+    //             }
                 
-            );
+    //         );
 
        
-    } catch (error) {
+    // } catch (error) {
     
-    }
-	  };
+    // }
+	   };
 
 
     return (
@@ -221,7 +328,7 @@ try {
                                                   onChange={handleInputChange}
                                                 //    {...register('first_name', { required: "First name is required", maxLength: 80, })}
                                                placeholder="first Name" />
-                                                <div className="help-block with-errors">{errors.first_name?.message}</div>
+                                                {/* <div className="help-block with-errors">{errors.first_name?.message}</div> */}
                                             </div>
                                         </div>
                                         <div className="col-lg-6 col-md-6">
@@ -237,7 +344,7 @@ try {
                                                 //   {...register('middle_name')}
                                                 // required data-error="Please enter your middle name"
                                                  placeholder="Middle Name" />
-                                              <div className="help-block with-errors">{errors.middle_name?.message}</div>
+                                              {/* <div className="help-block with-errors">{errors.middle_name?.message}</div> */}
                                             </div>
                                         </div>
                                         <div className="col-lg-6 col-md-6">
@@ -252,7 +359,7 @@ try {
                                                     onChange={handleInputChange}
                                                     //   {...register('last_name', { required: "Last name is required", maxLength: 80, })} 
                                                     placeholder="Last Name" />
-                                                <div className="help-block with-errors">{errors.last_name?.message}</div>
+                                                {/* <div className="help-block with-errors">{errors.last_name?.message}</div> */}
                                             </div>
                                         </div>
                                         <div className="col-lg-6 col-md-6">
@@ -281,7 +388,7 @@ try {
                                                     onChange={handleInputChange}
                                                     // {...register('dob', { required: "Date Of Birth is required" })} 
                                                     />
-                                                <div className="help-block with-errors">{errors.dob?.message}</div>
+                                                {/* <div className="help-block with-errors">{errors.dob?.message}</div> */}
                                             </div>
                                         </div>
                                         <div className="col-lg-6 col-md-6">
@@ -295,7 +402,7 @@ try {
                                                     onChange={handleInputChange} 
                                                   //  {...register('email', { required: "Email is required", maxLength: 80, })} 
                                                     placeholder="Email" />
-                                                <div className="help-block with-errors">{errors.email?.message}</div>
+                                                {/* <div className="help-block with-errors">{errors.email?.message}</div> */}
                                             </div>
                                         </div>
 
@@ -310,7 +417,7 @@ try {
                                                     onChange={handleInputChange}
                                                     // {...register('phone', { required: "Phone Number is required", maxLength: 80, })} 
                                                     className="form-control" placeholder="Phone number" />
-                                                <div className="help-block with-errors">{errors.phone?.message}</div>
+                                                {/* <div className="help-block with-errors">{errors.phone?.message}</div> */}
                                             </div>
                                         </div>
                                         
@@ -346,7 +453,7 @@ try {
                                                     onChange={handleInputChange}
                                                     // {...register('address', { required: "Address is required", maxLength: 80, })}
                                                      className="form-control" placeholder="  Current Address" />
-                                                <div className="help-block with-errors">{errors.address?.message}</div>
+                                                {/* <div className="help-block with-errors">{errors.address?.message}</div> */}
                                             </div>
                                         </div>
 
@@ -432,7 +539,7 @@ try {
 
 
                                         <div className="col-lg-12 col-md-12">
-                                        <button className="btn btn-gray-800 mt-2 animate-up-2"  onClick={onFileSubmit} type="submit">{showLoader ? <LoadingLogo /> :"Create Account"}</button>
+                                        <button className="btn btn-gray-800 mt-2 animate-up-2" disabled={!Object.values(formValidity).every((valid) => valid)}  onClick={onFileSubmit} type="submit">{showLoader ? <LoadingLogo /> :"Create Account"}</button>
                                             {/* <button type="submit" className="btn btn-primary">Send Message</button> */}
                                             {/* {!showLoader ? 
 		              ( */}
