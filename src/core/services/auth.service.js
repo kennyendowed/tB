@@ -3,6 +3,7 @@ import jwt_decode from 'jwt-decode';
 // const config = require("../config/db.config.js");
 
 const API_URL = process.env.REACT_APP_BaseApi_URL + 'auth';
+const API_URL2 = process.env.REACT_APP_BaseApi_URL ;
 
 // const signup = (email, password) => {
 //   return axios
@@ -19,7 +20,9 @@ const API_URL = process.env.REACT_APP_BaseApi_URL + 'auth';
 //     });
 // };
 
-
+const GetCountryInfo =() => {
+  return axios.get(API_URL2 + "getCountry", {});
+}
 
 const login = (username, password) => {
   return axios
@@ -49,9 +52,19 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const CreateAccount = async(payload) => {
+  // console.log(JSON.stringify(payload));
+   return axios.post(API_URL2 + "auth/CreateAccount",payload, {
+ //  'Content-Type': 'multipart/form-data'
+  //  "Content-Type": "application/json"
+  })
+  .then((response) => {
+      return response.data;
+  });
+}
 const authService = {
-  login,
-  logout,
+  login,GetCountryInfo,
+  logout,CreateAccount,
   getCurrentUser,
 };
 

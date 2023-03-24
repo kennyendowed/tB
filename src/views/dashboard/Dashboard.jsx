@@ -1,7 +1,6 @@
 import React, { useEffect, useState,createContext } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from 'react-toastify';
-import logo from "../../assets/img/logos/providus-logo.svg";
 import "./Dashboard.css";
 import dashboardService from "../../core/services/dashboard.service";
 import Skeleton from 'react-loading-skeleton';

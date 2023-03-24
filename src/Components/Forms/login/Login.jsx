@@ -6,8 +6,6 @@ import AuthService from "../../../core/services/auth.service";
 // import LoadingSpinner from "../../../Components/spinner";
 import LoadingLogo from "../../LoadingLogo";
 import "./Login.css";
-// import background from "../../../assets/img/curved-images/curved6.jpg";
- import logo from "../../../assets/img/logos/providus-logo.svg";
  import aboutUs from "../../../assets/welcome/assets/img/about/trustbank-about-us.avif"
 
 
