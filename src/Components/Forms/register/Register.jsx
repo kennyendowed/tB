@@ -7,6 +7,8 @@ import logo from "../../../assets/welcome/assets/img/logo.jpg";
 import LoadingLogo from "../../LoadingLogo";
 import axios from "axios";
 import "./Register.css";
+import 'react-phone-input-2/lib/style.css';
+import PhoneInput from 'react-phone-input-2';
 import Terms from "../../../views/terms";
 import aboutUs from "../../../assets/welcome/assets/img/about/trustbank-about-us.avif"
 const INITIAL_FORM_STATE = {
@@ -15,10 +17,8 @@ const INITIAL_FORM_STATE = {
         address: "",
         dob: "",
         country:"",
-        religion:"",
         email:"",
         gender:"",
-        phone:"",
         last_name: "",
         Documentvid: null,
         Documentsignature: null,
@@ -30,10 +30,10 @@ const INITIAL_FORM_STATE = {
     address: false,
     dob: false,
     country: false,
-    religion: false,
+    religion: true,
     email: false,
     gender: false,
-    phone: false,
+    phone: true,
     last_name: false,
     Documentvid: false,
     Documentsignature: false,
@@ -49,12 +49,7 @@ function Register() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showLoader, setLoading] = useState(false);
     const [GetcountryInfo, setcountryInfo] = useState([]);
-     const [file, setDocumentvidFile] = useState('');
-     const [signaturefile, setDocumentsignatureFile] = useState('');
-     const [passportfile, setDocumentpassportPhotoFile] = useState('');
-     const [getgender, setActiongenderRequest] = useState('');
-     const [getcountry, setActioncountryRequest] = useState('');
-     const [getreligion, setActionreligionRequest] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
      const [formDataToSend , setFormdata ] = useState(INITIAL_FORM_STATE)
     const fetchData = async() => {
        AuthService.GetCountryInfo().then((countryInfo) => {setcountryInfo(countryInfo);}).catch((error) =>{});
@@ -105,6 +100,9 @@ function Register() {
              for (const key in formDataToSend) {
                 formData.append(key, formDataToSend[key]);            
               }
+              
+              formData.append("phone", phoneNumber);              
+              formData.append("religion", "NULL");
             //   for (let key = 0; key < formDataToSend.length; key++) {
             //      formDataToSend.append(key, formData[key]);                
             //   }
@@ -413,10 +411,15 @@ try {
                                                 >
                                                     Phone number <sup className="text-danger">*</sup>
                                                 </label>
-                                                <input type="text" name="phone" id="phone"    value={formDataToSend.phone}
+                                                <PhoneInput
+                                                    country={'us'}
+                                                    value={formDataToSend.phone}
+                                                    onChange={setPhoneNumber}
+                                                  />
+                                                {/* <input type="text" name="phone" id="phone"    value={formDataToSend.phone}
                                                     onChange={handleInputChange}
                                                     // {...register('phone', { required: "Phone Number is required", maxLength: 80, })} 
-                                                    className="form-control" placeholder="Phone number" />
+                                                    className="form-control" placeholder="Phone number" /> */}
                                                 {/* <div className="help-block with-errors">{errors.phone?.message}</div> */}
                                             </div>
                                         </div>
@@ -457,7 +460,7 @@ try {
                                             </div>
                                         </div>
 
-                                        <div className="col-lg-6 col-md-6">
+                                        {/* <div className="col-lg-6 col-md-6">
                                             <div className="form-group">
                                                 <label
                                                 //className={religion != "" ? "" : "text-danger"}
@@ -479,7 +482,7 @@ try {
                                                 </select>
                                                 <div className="help-block with-errors"></div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="col-lg-6 col-md-6">
                                             <div className="form-group">
                                             <label
