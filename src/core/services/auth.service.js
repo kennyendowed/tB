@@ -24,12 +24,10 @@ const GetCountryInfo =() => {
   return axios.get(API_URL2 + "getCountry", {});
 }
 
-const login = (username, password) => {
+const login =async (username) => {
+  console.log(username)
   return axios
-    .post(API_URL + "/signin", {
-      username,
-      password,
-    })
+    .post(API_URL + "/signin",username)
     .then((response) => {
          if (response.data.data[0].accessToken) {
          localStorage.setItem("user",JSON.stringify( jwt_decode(response.data.data[0].accessToken)));
@@ -52,6 +50,17 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const chnangePassword = async(payload) => {
+  // console.log(JSON.stringify(payload));
+   return axios.post(API_URL2 + "auth/passwordReset",payload, {
+ //  'Content-Type': 'multipart/form-data'
+  //  "Content-Type": "application/json"
+  })
+  .then((response) => {
+      return response.data;
+  });
+}
+
 const CreateAccount = async(payload) => {
   // console.log(JSON.stringify(payload));
    return axios.post(API_URL2 + "auth/CreateAccount",payload, {
@@ -65,7 +74,7 @@ const CreateAccount = async(payload) => {
 const authService = {
   login,GetCountryInfo,
   logout,CreateAccount,
-  getCurrentUser,
+  getCurrentUser,chnangePassword,
 };
 
 export default authService;

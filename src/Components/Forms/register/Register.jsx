@@ -142,18 +142,13 @@ console.log(formValidity)
           progress: undefined,
         });
         setLoading(false);
-        	navigate("/auth");
+        	//navigate("/auth");
       }
     } catch (ex) {
       // console.log(ex.response.data.status)
       console.log(ex)
       //  console.log( ex.response.data.data[0].message )
       setLoading(false);
-      // console.log(ex)
-      // let exresMessage =
-      //   ex.response?.data?.data[0]?.message ||
-      //   ex.message ||
-      //   ex.response?.data?.error?.message;
 
       switch (ex.code || ex.response?.data?.status) {
         case "ERR_NETWORK":
@@ -204,90 +199,6 @@ console.log(formValidity)
 
 
 
-
-    // .then(
-    //     (response) => {
-    //         console.log(response.data[0]) 
-    //         if(response.data[0].code === 200){
-    // let resMessage= (response.data[0].message) ? response.data[0].message : response.message
-    //             // console.log(response.data[0].data);
-    //             // const data = response.data[0].data
-    //             // console.log(data.manufacturedYear)
-    //             // setItems(response.data);
-    //             let Msg = () => (
-    //                 <div>
-    //                     <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-    //                     <p>  {resMessage} </p>
-    //                 </div>
-    //             )
-    //             toast.success(Msg, {
-    //                 position: "top-right",
-    //                 autoClose: 10000,
-    //                 hideProgressBar: false,
-    //                 closeOnClick: true,
-    //                 pauseOnHover: true,
-    //                 draggable: true,
-    //                 progress: undefined,
-    //             });
-    //             setLoading(false)
-    //         }
-
-    //     }  , 
-    //         (ex) => {
-    //             setLoading(false)
-    //             console.log(ex)
-    //             console.log(ex.code)
-    //             let exresMessage= (ex.response.data.data[0].message) ? ex.response.data.data[0].message  : ex.message  ? ( ex.response.data.error.message) : ex.response.data.error.message 
-
-    //             console.log(exresMessage) 
-    //                 if (ex.code === "ERR_NETWORK" || ex.code ==="ERR_BAD_REQUEST") {
-    //                     let Msg = () => (
-    //                         <div>
-    //                             <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-    //                             <p> {exresMessage} </p>
-    //                         </div>
-    //                     )
-    //                     toast.error(Msg, {
-    //                         position: "top-right",
-    //                         autoClose: 10000,
-    //                         hideProgressBar: false,
-    //                         closeOnClick: true,
-    //                         pauseOnHover: true,
-    //                         draggable: true,
-    //                         progress: undefined,
-    //                     });
-
-    //                 }
-
-    //                 if (ex.code ==="ERR_BAD_RESPONSE" || ex.response.data.status === "FALSE") {
-    //                     // console.log(ex.response.data.data[0].message) 
-    //                     let Msg = () => (
-    //                         <div>
-    //                             <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
-    //                             <p> {ex.message}  </p>
-    //                             <p>❌ {exresMessage} {ex.response?.data?.error?.message }❌</p>
-    //                         </div>
-    //                     )
-    //                     toast.error(Msg, {
-    //                         position: "top-right",
-    //                         autoClose: 10000,
-    //                         hideProgressBar: false,
-    //                         closeOnClick: true,
-    //                         pauseOnHover: true,
-    //                         draggable: true,
-    //                         progress: undefined,
-    //                     });
-    //                 }
-
-
-    //             }
-
-    //         );
-
-
-    // } catch (error) {
-
-    // }
   };
 
 
@@ -545,22 +456,17 @@ console.log(formValidity)
 
                     <div className="col-lg-12 col-md-12">
                       <button className="btn btn-gray-800 mt-2 animate-up-2" disabled={!Object.values(formValidity).every((valid) => valid)} onClick={onFileSubmit} type="submit">{showLoader ? <LoadingLogo /> : "Create Account"}</button>
-                      {/* <button type="submit" className="btn btn-primary">Send Message</button> */}
-                      {/* {!showLoader ? 
-		              ( */}
-
-                      {/* ) : (
-disabled={!isDirty || !isValid}
-                        <button
-                          className="btn btn-primary"
-                          disabled
-                        >
-							<LoadingLogo />
-                        {/* <LoadingSpinner/>  
-                        </button>
-                      )
-					  } */}
+                    
                     </div>
+                    <span className="fw-normal">
+                           Already have an account ?  👉️ 
+                             <Link
+                 to="/auth"
+                 className="fw-bold">
+    Sign in
+             </Link>
+                            
+                         </span>
                   </div>
                 </form>
               </div>
@@ -574,64 +480,6 @@ disabled={!isDirty || !isValid}
 
 
 
-      {/* <form onSubmit={handleSubmit(onSubmit)}>
-			  <label>Username</label>
-					  <div className="mb-3">
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-			  {...register('username', { required: "Username is required", maxLength: 80 })}
-			  className="form-control"  aria-label="Email" aria-describedby="email-addon"
-            />
-          </div>
-				  <label>Username</label>
-					  <div className="mb-3">
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-			  {...register('username', { required: "Username is required", maxLength: 80 })}
-			  className="form-control"  aria-label="Email" aria-describedby="email-addon"
-            />
-          </div>
-          <p>{errors.username?.message}</p>
-		  <label>Password</label>
-			<div className="mb-3">
-            <input
-              type="password"
-              name="password"
-			  className="form-control"  aria-label="Email" aria-describedby="email-addon"
-              placeholder="Password"
-			  {...register('password',{
-                required: "Password is required",
-                minLength: {
-                  value: 4,
-                  message: "Password must be more than 4 characters",
-                },
-                // maxLength: {
-                //   value: 10,
-                //   message: "Password cannot exceed more than 10 characters",
-                // },
-              })}
-            />
-          </div>
-          <p>{errors.password?.message}</p>
-		  <div className="text-center">
-						<button type="submit" className="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
-					  </div>
-					  <div className="card-footer text-center pt-0 px-lg-2 px-1">
-                  <p className="mb-4 text-sm mx-auto">
-                    Don't have an account?
-					<Link
-						to="/auth"
-						className="text-info text-gradient font-weight-bold">
-						Sign in
-					</Link>
-                   
-                  </p>
-                </div>
-      </form> */}
     </>
 
 
