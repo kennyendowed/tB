@@ -33,8 +33,29 @@ const UpdatePassword = (props) => {
       //   resolve();	
       setisLoader(true)
       AuthService.chnangePassword(data).then(
-        () => {
+        (result) => {
           setisLoader(false)
+if(result.status ==="TRUE"){
+const Msg = () => (
+<div>
+   <img src={logo} className="toaster-brand-img h-100" alt="main_logo" />
+<p> { result.data[0].message} </p> 
+</div>
+)
+toast.success(Msg, {
+position: "top-right",
+autoClose: 10000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+
+// navigate("/auth/emailValidate");
+
+}
+         
           navigate("/auth");
           // window.location.reload();
         },
@@ -212,7 +233,7 @@ const UpdatePassword = (props) => {
             </div>
           </div>
 
-          {/* <ResetEmailOtpValidate showTerm={showTerm} handleClose={handleClose} /> */}
+          <ResetEmailOtpValidate showTerm={showTerm} handleClose={handleClose} />
 
         </div>
 

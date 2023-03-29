@@ -61,6 +61,16 @@ const chnangePassword = async(payload) => {
   });
 }
 
+const reSendOtp = async(payload) => {
+  return axios.post(API_URL2 + "auth/re-send-otp",payload, {
+    //  'Content-Type': 'multipart/form-data'
+     "Content-Type": "application/json"
+     })
+     .then((response) => {
+         return response.data;
+     });
+};
+
 const CreateAccount = async(payload) => {
   // console.log(JSON.stringify(payload));
    return axios.post(API_URL2 + "auth/CreateAccount",payload, {
@@ -72,7 +82,7 @@ const CreateAccount = async(payload) => {
   });
 }
 const authService = {
-  login,GetCountryInfo,
+  login,GetCountryInfo,reSendOtp,
   logout,CreateAccount,
   getCurrentUser,chnangePassword,
 };
