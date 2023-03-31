@@ -24,10 +24,10 @@ const GetCountryInfo =() => {
   return axios.get(API_URL2 + "getCountry", {});
 }
 
-const login = (username, password) => {
+const login = (email, password) => {
   return axios
     .post(API_URL + "/signin", {
-      username,
+      email,
       password,
     })
     .then((response) => {

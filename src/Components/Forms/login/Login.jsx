@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
+import logo from "../../../assets/welcome/assets/img/logo.jpg"
 // import LoadingSpinner from "../../../Components/spinner";
 import LoadingLogo from "../../LoadingLogo";
 import "./Login.css";
@@ -21,53 +22,53 @@ function Login() {
 
 	// }
 	const onSubmit =async (data) => {
-	    // console.log(data.email);
-		// console.log(data.username);
-// 		  try {
-// 			// return new Promise((resolve) => {
-// 			// 		setTimeout(() => {
-// 			//   resolve();	
-// 			setisLoader(true)	
-// 		 AuthService.login(data.username, data.password).then(
-// 		  () => {
-// 			setisLoader(false)	
- 			navigate("/dashboard");
-// 			 window.location.reload();
-// 		  },
-// 		  (ex) => {
-// 			setisLoader(false)	
-// 			// console.log(ex);
+	    console.log(data.password);
+		console.log(data.username);
+		  try {
+			// return new Promise((resolve) => {
+			// 		setTimeout(() => {
+			//   resolve();	
+			setisLoader(true)	
+		 AuthService.login(data.username, data.password).then(
+		  () => {
+			setisLoader(false)	
+ 			// navigate("/dashboard");
+			 window.location.reload();
+		  },
+		  (ex) => {
+			setisLoader(false)	
+			// console.log(ex);
 		
-// 				if (typeof  ex.response?.data?.data != 'string') {
-// 				  for (let err in  ex.response?.data?.data) {
-// 					 console.log(err);
-// 					let Msg = () => (
-// 						<div>
-// 							 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
-// 						<p> { ex?.response?.data?.data[0]?.message} </p> 
-// 						</div>
-// 					  )
-// 					toast.error(Msg, {
-// 						position: "top-right",
-// 						autoClose: 10000,
-// 						hideProgressBar: false,
-// 						closeOnClick: true,
-// 						pauseOnHover: true,
-// 						draggable: true,
-// 						progress: undefined,
-// 						});
-// 				   // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
-// 				  }
-// 				}
+				if (typeof  ex.response?.data?.data != 'string') {
+				  for (let err in  ex.response?.data?.data) {
+					 console.log(err);
+					let Msg = () => (
+						<div>
+							 <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+						<p> { ex?.response?.data?.data[0]?.message} </p> 
+						</div>
+					  )
+					toast.error(Msg, {
+						position: "top-right",
+						autoClose: 10000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+						});
+				   // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
+				  }
+				}
 			
-// 			// console.log(ex.response.data.data[0].message);
-// 		  }
-// 		);
-// // 	}, 2000);
-// // });
-// 	  } catch (err) {
-// 		 console.log(err);
-// 	  }
+			// console.log(ex.response.data.data[0].message);
+		  }
+		);
+// 	}, 2000);
+// });
+	  } catch (err) {
+		 console.log(err);
+	  }
 
 	  };
 	
@@ -102,8 +103,8 @@ function Login() {
                           <input
 						   className="form-control login_input"
                           type="text"
-                          name="username"
-                          placeholder="Username"
+                          name="email"
+                          placeholder="Email"
 			              {...register('username', { required: "Username is required", maxLength: 80 })}
 			              
 						 aria-label="Email" 
@@ -117,6 +118,7 @@ function Login() {
                        <input
                            type = {showPassword ? "text" : "password"}
                            name="password"
+                           
 			                className=" form-control login_input"  aria-label="Email" aria-describedby="email-addon"
                             placeholder="Password"
 			              {...register('password',{
