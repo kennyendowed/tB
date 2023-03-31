@@ -143,6 +143,8 @@ try {
       });
       setLoading(false);
     }
+    navigate("/")
+    
 }  catch (ex) {
    // console.log(ex.response.data.status)
     console.log(ex)

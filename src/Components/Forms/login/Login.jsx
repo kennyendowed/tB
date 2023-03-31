@@ -111,7 +111,7 @@ function Login() {
                          />
 						  <p className="error-color">{errors.username?.message}</p>
                       </div>
-                      <p className="error-color">{errors.username?.message}</p> 
+                     
 		            <label>Password</label>
 			        <div className="mb-3 relative password-field">
                        <input
@@ -134,8 +134,9 @@ function Login() {
 			<div className="icon-container" onClick={() => setShowPassword(shown => !shown)}>
 				{showPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
 			</div>
+      <p className="error-color">{errors.password?.message}</p>
           </div>
-          <p className="error-color">{errors.password?.message}</p>
+          
 		  <div className="col-lg-12 col-md-12">
 		  {!showLoader ? 
 		              (
