@@ -41,7 +41,7 @@ const MainRender = () => {
               
              )
            } */}
-      {(location.pathname === "/auth" || location.pathname === "/contact" || location.pathname === "/faq" || location.pathname === "/aboutUs" || location.pathname === "/auth/register" || location.pathname === "/welcome" || location.pathname === "/") ?
+      {(location.pathname === "/auth"  || location.pathname === "/auth/chnangePassword" ||  location.pathname === "/contact" || location.pathname === "/faq" || location.pathname === "/aboutUs" || location.pathname === "/auth/register" || location.pathname === "/welcome" || location.pathname === "/") ?
         (
 
           <main className="main-content position-relative max-height-vh-100 h-100 mt- border-radius-lg ">

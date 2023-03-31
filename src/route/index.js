@@ -30,25 +30,19 @@ const MainRoutes = () => (
 	<Routes>
 		{/** Protected Routes */}
 		{/** Wrap all Route under ProtectedRoutes element */}
-		<Route path="/dashboard" element={<DashboardPage />} />
-		<Route path = "/addFunds" element ={<AddFunds/>}/>
-		<Route path = "/transferFunds" element ={<TransferFunds/>}/>
-		<Route path = "/Transactions" element ={<Transactions/>}/>
-		<Route path="/settings" element={<SettingsPage />} >
-				  <Route path="/settings/update-Profile" element={<SettingsPage />} /> 
-				  <Route path="/settings/update-Password" element={<SettingsPage />} /> 
-				</Route> 
+	
 				
 		<Route path="/" element={<ProtectedRoutes />}>
 			<Route path="/" element={<InnerContent />}>
             <Route path="/" element={<Navigate replace to="dashboard" />} />
-				{/* <Route path="/dashboard" element={<DashboardPage />} >
-				  <Route path="/dashboard/treated" element={<DashboardPage />} /> 
-				</Route> */}
-				{/* <Route path = "/addFunds" element ={<addFunds/>}/> */}
-				{/* <Route path = "/Treatedrequests" element ={<TreatedRequest/>}/>
-				<Route path = "/Reports" element ={<Reports/>}/>
-				<Route path = "/BatchApproval" element ={<BatchApproval/>}/>  */}
+			<Route path="/dashboard" element={<DashboardPage />} />
+				<Route path = "/addFunds" element ={<AddFunds/>}/>
+				<Route path = "/transferFunds" element ={<TransferFunds/>}/>
+				<Route path = "/Transactions" element ={<Transactions/>}/>
+				<Route path="/settings" element={<SettingsPage />} >
+				  <Route path="/settings/update-Profile" element={<SettingsPage />} /> 
+				  <Route path="/settings/update-Password" element={<SettingsPage />} /> 
+				</Route> 
 			</Route>
 			</Route>
 	
@@ -67,6 +61,9 @@ const MainRoutes = () => (
 		<Route path="auth" element={<PublicRoutes />}>
 			<Route path="/auth" element={<LoginPage />} />
 			<Route path="register" element={<LoginPage />} />
+			<Route path="chnangePassword" element={<LoginPage />} />
+			<Route path="forget-password" element={<LoginPage />} />
+			<Route path="reset-otp" element={<LoginPage />} />
 		</Route>
 
 		{/** Permission denied route */}
