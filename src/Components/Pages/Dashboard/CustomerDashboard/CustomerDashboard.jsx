@@ -120,6 +120,9 @@ function CustomerDashboard() {
 
 }, [isFetchExisted, currentPage, search, sorting]);
 
+
+
+
 return (
 <>
 <div className="row">
