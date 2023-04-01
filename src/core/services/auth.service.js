@@ -29,7 +29,10 @@ const login =async (username) => {
   return axios
     .post(API_URL + "/signin",username)
     .then((response) => {
+      console.log(response)
          if (response.data.data[0].accessToken) {
+          console.log(response.data.data[0].roles[0])
+          sessionStorage.setItem("role" , JSON.stringify(response.data.data[0].rolesss))
          localStorage.setItem("user",JSON.stringify( jwt_decode(response.data.data[0].accessToken)));
          localStorage.setItem("token", JSON.stringify(response.data.data[0].accessToken));
       }
@@ -47,7 +50,7 @@ const logout = () => {
 
 const getCurrentUser = () => {
   // console.log(jwt_decode(localStorage.getItem("user")))
-  return JSON.parse(localStorage.getItem("user"));
+  return JSON.parse(localStorage.getItem("role"));
 };
 
 const chnangePassword = async(payload) => {

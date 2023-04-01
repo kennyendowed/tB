@@ -15,6 +15,9 @@ const Sidebar = (props) => {
   const { currentUser , logout ,hamburger } = useAuthContext();
   const [toggleMenu, settoggle] = useState(false);
   
+
+  const role = JSON.parse(sessionStorage.getItem("roles"))
+  console.log(role)
   const logOut = () => {
     AuthService.logout();
     logout();
@@ -160,15 +163,15 @@ const Sidebar = (props) => {
           <Link to={"/dashboard"} className="sidebar-link"> 	<i className="align-middle me-2 fas fa-fw fa-home"></i> <span className="align-middle">Dashboards</span>      </Link>  
 											
 					</li>
-          {/* {currentUser.roleaccess.includes('fincon') && ( 
-              <> */}
+         
+            <> 
 	               <li className={location.pathname === '/addFunds' ? 'sidebar-item  active':'sidebar-item'}>
                  <Link to={"/addFunds"} className="sidebar-link"> 	   <i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Fund || Debit Accounts</span>    </Link>  
                  
 					    	</li>
 
-              {/* </>
-           )}   */}
+              </>
+             
               <li className={location.pathname === '/transferFunds' ? 'sidebar-item  active':'sidebar-item'}>
                  <Link to={"/transferFunds"} className="sidebar-link"> 	  	<i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Transfer Money</span>  </Link>  
                  

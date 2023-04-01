@@ -10,6 +10,7 @@ import "./Login.css";
 import aboutUs from "../../../assets/welcome/assets/img/about/trustbank-about-us.avif"
 
 
+
 function Login() {
   const navigate = useNavigate();
   const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({ mode: "onChange" });
@@ -21,6 +22,8 @@ function Login() {
   // 	setShowpassword(true);
 
   // }
+
+  console.log(AuthService.getCurrentUser())
   const onSubmit = async (data) => {
 
     try {
@@ -31,13 +34,14 @@ function Login() {
       AuthService.login(data).then(
         () => {
           setisLoader(false)
+          // console.log("cnvdivngfb")
           navigate("/dashboard");
           // window.location.reload();
         },
         (ex) => {
           setisLoader(false)
-          //console.log(ex);
-          if (ex?.response?.data.type === "firstLogin") {
+      
+          if (ex?.response?.data?.type === "firstLogin") {
             navigate("/auth/chnangePassword");
           }
           if (typeof ex.response?.data?.data != 'string') {
@@ -62,7 +66,7 @@ function Login() {
             }
           }
 
-          // console.log(ex.response.data.data[0].message);
+          // console.log(ex?.response?.data?.data[0]?.message);
         }
       );
       // 	}, 2000);
