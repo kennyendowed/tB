@@ -32,7 +32,8 @@ function Login() {
       //   resolve();	
       setisLoader(true)
       AuthService.login(data).then(
-        () => {
+        (data) => {
+          // console.log(data)
           setisLoader(false)
           // console.log("cnvdivngfb")
           navigate("/dashboard");

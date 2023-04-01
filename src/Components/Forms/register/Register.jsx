@@ -142,7 +142,7 @@ console.log(formValidity)
           progress: undefined,
         });
         setLoading(false);
-        	//navigate("/auth");
+        	navigate("/auth");
       }
     } catch (ex) {
       // console.log(ex.response.data.status)

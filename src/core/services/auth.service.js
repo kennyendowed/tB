@@ -25,13 +25,13 @@ const GetCountryInfo =() => {
 }
 
 const login =async (username) => {
-  console.log(username)
+  // console.log(username)
   return axios
     .post(API_URL + "/signin",username)
     .then((response) => {
-      console.log(response)
+      // console.log(response.data.data[0].accessToken)
          if (response.data.data[0].accessToken) {
-          console.log(response.data.data[0].roles[0])
+          
           sessionStorage.setItem("role" , JSON.stringify(response.data.data[0].rolesss))
          localStorage.setItem("user",JSON.stringify( jwt_decode(response.data.data[0].accessToken)));
          localStorage.setItem("token", JSON.stringify(response.data.data[0].accessToken));
@@ -44,13 +44,14 @@ const login =async (username) => {
 const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-  localStorage.removeItem("record");
+  sessionStorage.removeItem("role");
   
 };
 
 const getCurrentUser = () => {
+ 
   // console.log(jwt_decode(localStorage.getItem("user")))
-  return JSON.parse(localStorage.getItem("role"));
+  return JSON.parse(localStorage.getItem("user"));
 };
 
 const chnangePassword = async(payload) => {
