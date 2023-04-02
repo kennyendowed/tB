@@ -24,14 +24,15 @@ const GetCountryInfo =() => {
   return axios.get(API_URL2 + "getCountry", {});
 }
 
-const login = (username, password) => {
+const login =async (username) => {
+  // console.log(username)
   return axios
-    .post(API_URL + "/signin", {
-      username,
-      password,
-    })
+    .post(API_URL + "/signin",username)
     .then((response) => {
+      // console.log(response.data.data[0].accessToken)
          if (response.data.data[0].accessToken) {
+          
+          sessionStorage.setItem("role" , JSON.stringify(response.data.data[0].rolesss))
          localStorage.setItem("user",JSON.stringify( jwt_decode(response.data.data[0].accessToken)));
          localStorage.setItem("token", JSON.stringify(response.data.data[0].accessToken));
       }
@@ -43,13 +44,35 @@ const login = (username, password) => {
 const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-  localStorage.removeItem("record");
+  sessionStorage.removeItem("role");
   
 };
 
 const getCurrentUser = () => {
+ 
   // console.log(jwt_decode(localStorage.getItem("user")))
   return JSON.parse(localStorage.getItem("user"));
+};
+
+const chnangePassword = async(payload) => {
+  // console.log(JSON.stringify(payload));
+   return axios.post(API_URL2 + "auth/passwordReset",payload, {
+ //  'Content-Type': 'multipart/form-data'
+  //  "Content-Type": "application/json"
+  })
+  .then((response) => {
+      return response.data;
+  });
+}
+
+const reSendOtp = async(payload) => {
+  return axios.post(API_URL2 + "auth/re-send-otp",payload, {
+    //  'Content-Type': 'multipart/form-data'
+     "Content-Type": "application/json"
+     })
+     .then((response) => {
+         return response.data;
+     });
 };
 
 const CreateAccount = async(payload) => {
@@ -63,9 +86,9 @@ const CreateAccount = async(payload) => {
   });
 }
 const authService = {
-  login,GetCountryInfo,
+  login,GetCountryInfo,reSendOtp,
   logout,CreateAccount,
-  getCurrentUser,
+  getCurrentUser,chnangePassword,
 };
 
 export default authService;
