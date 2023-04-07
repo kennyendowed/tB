@@ -35,8 +35,8 @@ const TransferFunds =(payload) =>{
   });
 }
 
-const fetchAllApproveDeparment =() =>{
-  return axios.get(API_URL2 + "GetApproveDeparment", { headers: authHeader() });
+const transferPin =() =>{
+  return axios.get(API_URL2 + "transferPin", { headers: authHeader() });
 }
 
 const fetchAllDeparment =() =>{
@@ -58,7 +58,8 @@ const validateRM = (payload) => {
 });
 }
 
-const ViewAllRequests =(id) => {
+const ViewAllRequests = (id) => {
+
   return axios.get(API_URL2 + `GetAllDistinctPendingRequests/${id}`,{ headers: authHeader() })
   .then((response) => {
     return response.data;
@@ -130,7 +131,7 @@ const dashboardService = {
   validateANDUpdateRM,
   fetchTreatedRequests,
   fetchAllsDeparment,
-  fetchAllApproveDeparment,
+
   fetchAllDeparment,
   fetchPendingRequests,
   fetchExistedUsers,
@@ -140,7 +141,8 @@ const dashboardService = {
   ActionRequest,
   ViewAllRequests,
   BashApproveDeclineRequests,
-  fetchUserRecords
+  fetchUserRecords,
+  transferPin,
 };
 
 export default dashboardService;
