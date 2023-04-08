@@ -34,7 +34,12 @@ const TransferFunds =(payload) =>{
       return response.data;
   });
 }
-
+const verifyToken =(payload) =>{
+  return axios.post(API_URL2 + "ValidatetransferPin",payload, {headers: authHeader()})
+  .then((response) => {
+      return response.data;
+  });
+}
 const transferPin =() =>{
   return axios.get(API_URL2 + "transferPin", { headers: authHeader() });
 }
@@ -143,6 +148,7 @@ const dashboardService = {
   BashApproveDeclineRequests,
   fetchUserRecords,
   transferPin,
+  verifyToken,
 };
 
 export default dashboardService;
