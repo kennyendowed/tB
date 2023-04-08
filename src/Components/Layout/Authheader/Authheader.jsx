@@ -7,6 +7,7 @@ import { Header,Topnavbar, Sidebar, Onheader } from "../../../Components";
 
 function Authheader() {
   const { currentUser } = useAuthContext();
+  console.log(currentUser)
   return   (
 <>
      {/* {currentUser ?( */}
@@ -19,7 +20,7 @@ function Authheader() {
 				<div className="container-fluid">
         <div className="header">
 						<h1 className="header-title">
-							Welcome back, Linda!
+							Welcome back, {currentUser?.first_name}
 						</h1>
 						{/* <p className="header-subtitle">You have 24 new messages and 5 new notifications.</p> */}
 					</div>

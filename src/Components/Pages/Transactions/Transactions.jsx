@@ -3,6 +3,8 @@ import "./Transactions.css";
 import { useRecordStatusContext } from "../../../core/modules";
 import { TableHeader, Pagination, Search } from "../../DataTable";
 import LoadingLogo from "../../LoadingLogo";
+import dashboardService from "../../../core/services/dashboard.service"; 
+import { ScaleLoader } from "react-spinners";
 
 
     const Transactions = (props) => {
@@ -13,7 +15,7 @@ import LoadingLogo from "../../LoadingLogo";
         const [search, setSearch] = useState("");
         const [stat, setStat] = useState([]);
         const { isFetchResult,fetchResult} = useRecordStatusContext();
-        const [isFetchExisted, setFetchExisted] = useState([]);
+        const [allTransactions, setAllTransaction] = useState([]);
         const ITEMS_PER_PAGE = 20;
   const headers = [
 	  { name: "No#", field: "id", sortable: false },
@@ -27,22 +29,24 @@ import LoadingLogo from "../../LoadingLogo";
 	var arData = {
 		Department: 'null'
 	  }
-	// dashboardService.fetchAllDeparment().then(
-	// 	(response) => {
-	// 			setDepartment(response.data.data);
-	// 		//         setFetchExisted(response.data.data.pendingRequest.rows);
-	// 			 });  
+	dashboardService.fetchAllTransactionRecords().then(
+		(response) => {
+            console.log(response)
+				setAllTransaction(response);
+			//         setFetchExisted(response.data.data.pendingRequest.rows);
+            setisLoader(false)
+				 });  
 				 
-	// 			 dashboardService.fetchPendingRequests(arData).then(
-	// 				(response) => {
-	// 					setisLoader(false)	
-	// 					setFetchExisted(response.data.pendingRequest.rows);
-	// 				});  
-	// 				fetchResult();
+				//  dashboardService.fetchPendingRequests(arData).then(
+				// 	(response) => {
+				// 		setisLoader(false)	
+				// 		setFetchExisted(response.data.pendingRequest.rows);
+				// 	});  
+					// fetchResult();
 
 }, []);
   const commentsData2 = useMemo(() => {
-	let computedComments = isFetchExisted;
+	let computedComments = allTransactions;
 	if (search) {
 		computedComments = computedComments.filter(comment =>
 			comment.newRMcode.toLowerCase().includes(search) || comment.oldRMcODE.toLowerCase().includes(search) || comment.accountNumber.toLowerCase().includes(search)
@@ -67,7 +71,7 @@ import LoadingLogo from "../../LoadingLogo";
 		return computedComments.data;
 	}
 
-}, [isFetchExisted, currentPage, search, sorting]);
+}, [allTransactions, currentPage, search, sorting]);
 
     return (
         <> 
@@ -84,7 +88,7 @@ import LoadingLogo from "../../LoadingLogo";
                         {/* {showLoader && (
                                         <LoadingLogo  title="Hello, world!" text="Please hold while we fetch records."/>
                                         )} */}
-                            <div className="table-responsive">
+                            <div className="table-responsive position-relative">
                                 <table className="table align-items-center mb-0">
                                     <TableHeader
                                         headers={headers}
@@ -93,29 +97,27 @@ import LoadingLogo from "../../LoadingLogo";
                                         }
                                     />
                        
-                                    <tbody >
-                                 
-                                        {/* { commentsData2 ? (                                      
+                                    <tbody className="h-auto">
+                                    {
+                                        showLoader ?
+                                        <div className="position-absolute w-100 h-100 d-flex justify-content-center align-items-center ">
+                                            <ScaleLoader color="#3838d6" className="mx-auto" />
+                                         </div> :
+
+                                       <>
+                                        { commentsData2 ? (                                      
                                             commentsData2.map((result, index) => {
                                                 return <tr key={result.id}>
                                                     <td style={{marginLeft:"900px"}}>{index}</td>
-                                                    <td>{result.bra_code}</td>
-                                                    <td>{result.cus_num}</td>
-                                                    <td>{result.accountNumber}</td>
-                                                <td>{result.unit}</td> 
-                                                    <td>{result.oldRMcODE}</td>
-                                                    <td>{result.newRMcode}</td>
-                                                    <td>{result.RequestStatus}</td>
+                                                    <td>{result?.TransIncurrentDate}</td>
+                                                    <td>{result?.amountIn}</td>
+                                                    <td>{result?.id}</td> 
+                                                    
                                                     <td>{new Date(result.createdAt).toLocaleString() //undefined ,options
                                                     
                                                     
                                                     }</td>
-                                                    <td className="text-right">
-                                                        <Button variant="variant" onClick={() => handleShow(result,index)}>
-                                                            View Customer
-                                                        </Button>
-
-                                                    </td>
+                                                  
                                                 </tr>
                                             })  ) : (
                                             <>
@@ -125,8 +127,9 @@ import LoadingLogo from "../../LoadingLogo";
                                          
                                              </>
                                               )
-                                        } */}
-
+                                        } 
+                                        </>
+                                    }
 
                                     </tbody>
                                 </table>

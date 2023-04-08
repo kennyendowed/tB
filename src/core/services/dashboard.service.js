@@ -1,11 +1,22 @@
 import authHeader from "../services/auth-header";
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_BaseApi_URL+'hod';
+
 const API_URL2 = process.env.REACT_APP_BaseApi_URL;
 
-const fetchExistedUsersRecords = () => {
-  return axios.get(API_URL2 + "GetAllStatusCount", { headers: authHeader() })
+
+
+
+const fetchUserRecords = () => {
+  return axios.get( API_URL2 + "dashboard", { headers : authHeader() })
+  .then((response) => {
+      return response.data.data;
+});
+  // return fetch(API_URL + "/getAllExistedRMS", { method: 'GET', headers: authHeader()});
+};
+
+const fetchAllTransactionRecords = () => {
+  return axios.get(API_URL2 + "fetchAllTransactionInfo", { headers: authHeader() })
   .then((response) => {
       return response.data.data;
 });
@@ -17,15 +28,20 @@ const fetchExistedUsers = () => {
   // return fetch(API_URL + "/getAllExistedRMS", { method: 'GET', headers: authHeader()});
 };
 
-const fetchRMSCustomerUsersList =(payload) =>{
-  return axios.post(API_URL2 + "getRMSCustomerList",payload, {headers: authHeader()})
+const TransferFunds =(payload) =>{
+  return axios.post(API_URL2 + "FundTransfer",payload, {headers: authHeader()})
   .then((response) => {
       return response.data;
   });
 }
-
-const fetchAllApproveDeparment =() =>{
-  return axios.get(API_URL2 + "GetApproveDeparment", { headers: authHeader() });
+const verifyToken =(payload) =>{
+  return axios.post(API_URL2 + "ValidatetransferPin",payload, {headers: authHeader()})
+  .then((response) => {
+      return response.data;
+  });
+}
+const transferPin =() =>{
+  return axios.get(API_URL2 + "transferPin", { headers: authHeader() });
 }
 
 const fetchAllDeparment =() =>{
@@ -47,7 +63,8 @@ const validateRM = (payload) => {
 });
 }
 
-const ViewAllRequests =(id) => {
+const ViewAllRequests = (id) => {
+
   return axios.get(API_URL2 + `GetAllDistinctPendingRequests/${id}`,{ headers: authHeader() })
   .then((response) => {
     return response.data;
@@ -113,22 +130,25 @@ const GetReport =(payload) =>{
 
 const dashboardService = {
   fetchbatchPendingRequests,
-  fetchExistedUsersRecords,
+  fetchAllTransactionRecords,
   GetReport,
   validateRM,
   validateANDUpdateRM,
   fetchTreatedRequests,
   fetchAllsDeparment,
-  fetchAllApproveDeparment,
+
   fetchAllDeparment,
   fetchPendingRequests,
   fetchExistedUsers,
-  fetchRMSCustomerUsersList,
+  TransferFunds,
   GetAccountInfo,
   ReassignRequest,
   ActionRequest,
   ViewAllRequests,
-  BashApproveDeclineRequests
+  BashApproveDeclineRequests,
+  fetchUserRecords,
+  transferPin,
+  verifyToken,
 };
 
 export default dashboardService;

@@ -4,6 +4,8 @@ import { BarChart, Bar, LineChart, Line, Cell, XAxis, YAxis, CartesianGrid, Tool
 import { useRecordStatusContext } from "../../../../core/modules";
 import { TableHeader, Pagination, Search } from "../../../DataTable";
 import LoadingLogo from "../../../LoadingLogo";
+import dashboardService from "../../../../core/services/dashboard.service";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 
 // import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -38,8 +40,9 @@ function CustomerDashboard() {
 	const [search, setSearch] = useState("");
     const [stat, setStat] = useState([]);
 	const { isFetchResult,fetchResult} = useRecordStatusContext();
-	const [isFetchExisted, setFetchExisted] = useState([]);
-
+	const [lastFiveTransaction, setLastFiveTransaction] = useState([]);
+    const [userRecord , setUserRecord] = useState([])
+    
     // const fetchData = async () => {
     //   const API_URL2 = process.env.REACT_APP_BaseApi_URL;
     //   const response = await fetch(API_URL2 + "barReport", {
@@ -73,6 +76,42 @@ function CustomerDashboard() {
 	  { name: "Status", field: "status", sortable: true },
 	  { name: "Date", field: "transDate", sortable: false }
   ];
+
+
+
+
+   useEffect(()=>{
+
+  
+    setisLoader(true)
+    dashboardService.fetchUserRecords().then(
+        	(response) => {
+                setisLoader(false)
+                console.log(response)
+                console.log(response?.topFiveTransactionInformation)
+                setLastFiveTransaction(response?.topFiveTransactionInformation)
+                setUserRecord(response?.userInformation)
+             
+                
+        		//         
+        			 })
+             .catch(err => 
+                
+                console.log(err)
+                
+                )
+             
+        			//  dashboardService.fetchPendingRequests(arData).then(
+        			// 	(response) => {
+        			// 		setisLoader(false)	
+        			// 		setFetchExisted(response.data.pendingRequest.rows);
+        			// 	});  
+        				// fetchResult();
+
+
+   },[])
+
+
   useEffect(() => {
 	setisLoader(true)
 	var arData = {
@@ -93,7 +132,7 @@ function CustomerDashboard() {
 
 }, []);
   const commentsData2 = useMemo(() => {
-	let computedComments = isFetchExisted;
+	let computedComments = lastFiveTransaction;
 	if (search) {
 		computedComments = computedComments.filter(comment =>
 			comment.newRMcode.toLowerCase().includes(search) || comment.oldRMcODE.toLowerCase().includes(search) || comment.accountNumber.toLowerCase().includes(search)
@@ -118,7 +157,7 @@ function CustomerDashboard() {
 		return computedComments.data;
 	}
 
-}, [isFetchExisted, currentPage, search, sorting]);
+}, [lastFiveTransaction, currentPage, search, sorting]);
 
 
 
@@ -129,6 +168,12 @@ return (
 
 {/* <div className="col-xl-6 col-xxl-5"> */}
 <div className="col-md-6 col-lg-3 col-xl">
+
+{ showLoader ?
+              <div className="text-center pagination-centered my-7">
+                <ScaleLoader color="#3838d6" />
+              </div> :
+        
 							<div className="card">
 								<div className="card-body">
 									<div className="row">
@@ -147,13 +192,16 @@ return (
 											</div>
 										</div>
 									</div>
-									<h1 className="display-5 mt-1 mb-3">$25.300</h1>
+									<h1 className="display-5 mt-1 mb-3">${userRecord?.balance}</h1>
                                     <div className="mb-0">
-										<span className="text-danger"> <i className="mdi mdi-arrow-bottom-right"></i> $25.300 </span>
-										Total Balance
+										<span className="text-danger"> <i className="mdi mdi-arrow-bottom-right"></i> {userRecord?.routing_no} </span>
+										
 									</div>
+                                    
 								</div>
 							</div>
+
+                                            }
 						</div>
 {/* 
 						<div className="col-xl-6 col-xxl-7 d-flex">
@@ -177,30 +225,36 @@ return (
                                 <div className="chart chart-md"> */}
 
 <div className="col-md-6 col-lg-3 col-xl">
+       { showLoader?
+                      <div className="text-center pagination-centered my-7">
+                             <ScaleLoader color="#3838d6" />
+                       </div> :
 							<div className="card">
 								<div className="card-body">
 
 								<ResponsiveContainer width="100%" height={185}>
                                 <LineChart width={600} height={300} data={data}  margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
+                           top: 5,
+                           right: 30,
+                      left: 20,
+                       bottom: 5,
           }}>
-    <XAxis dataKey="name" />
-    <YAxis />
-    <CartesianGrid stroke="#ccc" />
-    <Tooltip />
-    <Legend />
-    <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-    <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-  </LineChart>   
-   </ResponsiveContainer> 
-
+             <XAxis dataKey="name" />
+            <YAxis />
+            <CartesianGrid stroke="#ccc" />
+             <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="pv" stroke="#8884d8" />
+            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+            </LineChart>   
+          </ResponsiveContainer> 
+             
+    </div>
 	</div>
-	</div> 
-							</div>
-						</div>
+        } 
+	</div>
+        
+</div>
           <div className="row">
 						<div className="col-12">
 							<div className="card">
@@ -216,43 +270,42 @@ return (
                                             setSorting({ field, order })
                                         }
                                     />
-                       
+                                    
+                                        
+                                   
                                     <tbody >
-                                 
-                                        {/* { commentsData2 ? (                                      
-                                            commentsData2.map((result, index) => {
-                                                return <tr key={result.id}>
+                                   { showLoader ?
+                                    <div className="text-center">
+                                            <ScaleLoader color="#3838d6" />
+                                        </div> :
+                                           <>
+                                            { commentsData2 ? (                                      
+                                              commentsData2.map((result, index) => {
+                                                 return <tr key={result.id}>
                                                     <td style={{marginLeft:"900px"}}>{index}</td>
-                                                    <td>{result.bra_code}</td>
-                                                    <td>{result.cus_num}</td>
-                                                    <td>{result.accountNumber}</td>
-                                                <td>{result.unit}</td> 
-                                                    <td>{result.oldRMcODE}</td>
-                                                    <td>{result.newRMcode}</td>
-                                                    <td>{result.RequestStatus}</td>
-                                                    <td>{new Date(result.createdAt).toLocaleString() //undefined ,options
-                                                    
-                                                    
-                                                    }</td>
-                                                    <td className="text-right">
-                                                        <Button variant="variant" onClick={() => handleShow(result,index)}>
-                                                            View Customer
-                                                        </Button>
-
-                                                    </td>
+                                                    <td>{result?.TransIncurrentDate}</td>
+                                                    <td>{result?.amountIn}</td>
+                                                    <td>{result?.id}</td> 
+                                                   
+                                                 
+                                                     <td>{new Date(result.createdAt).toLocaleString()}</td>
+                                                   
                                                 </tr>
-                                            })  ) : (
-                                            <>
+                                               })  ) : (
+                                            
                                             <tr>
                                                 <td>No record</td>
                                             </tr>
                                          
-                                             </>
+                                             
                                               )
-                                        } */}
-
-
+                                           }
+                                           </>
+                                        
+                                       
+                                      }
                                     </tbody>
+                                    
                                 </table>
                             </div>
                             <div className="col-lg-6 col-5 my-auto text-end">
