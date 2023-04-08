@@ -7,7 +7,7 @@ import { Header,Topnavbar, Sidebar, Onheader } from "../../../Components";
 
 function Authheader() {
   const { currentUser } = useAuthContext();
-  console.log(currentUser)
+  // console.log("user details",currentUser)
   return   (
 <>
      {/* {currentUser ?( */}
