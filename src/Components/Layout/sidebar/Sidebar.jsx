@@ -17,6 +17,7 @@ const Sidebar = (props) => {
   
 
   //const role = JSON.parse(sessionStorage.getItem("role"))
+  console.log(currentUser)
   console.log(currentUser?.rolesss)
   const logOut = () => {
     AuthService.logout();
@@ -41,8 +42,8 @@ const Sidebar = (props) => {
                                 </Link>
 			<div className="sidebar-content">
 				<div className="sidebar-user">
-					<img src="img/avatars/avatar.jpg" className="img-fluid rounded-circle mb-2" alt="Linda Miller" />
-					<div className="fw-bold">Linda Miller</div>
+					<img src="img/avatars/avatar.jpg" className="img-fluid rounded-circle mb-2" alt={currentUser?.first_name + " " + currentUser?.last_name} />
+					<div className="fw-bold">{currentUser?.first_name + " " + currentUser?.last_name} </div>
 					<small>Front-end Developer</small>
 				</div>
 

@@ -4,12 +4,13 @@ import AuthService from "../../services/auth.service";
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(false);
+
   const [hamburger, settoggle] = useState(false);
 
   //console.log(AuthService.getCurrentUser())
   useEffect(() => {
     const user = AuthService.getCurrentUser();
-   //console.log(AuthService.getCurrentUser())  
+   console.log(AuthService.getCurrentUser())  
     if (user) {
       setCurrentUser(user);
     }

@@ -37,7 +37,7 @@ function Login() {
           setisLoader(false)
           // console.log("cnvdivngfb")
           navigate("/dashboard");
-          // window.location.reload();
+          window.location.reload();
         },
         (ex) => {
           setisLoader(false)
