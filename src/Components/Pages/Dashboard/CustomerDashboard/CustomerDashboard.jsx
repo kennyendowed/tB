@@ -1,12 +1,13 @@
 import React, { useEffect, useState,createContext,useMemo } from "react";
 import "./CustomerDashboard.css";
+import { useNavigate, Link,useLocation } from "react-router-dom";
 import { BarChart, Bar, LineChart, Line, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useRecordStatusContext } from "../../../../core/modules";
+import { useRecordStatusContext ,useAuthContext} from "../../../../core/modules";
 import { TableHeader, Pagination, Search } from "../../../DataTable";
 import LoadingLogo from "../../../LoadingLogo";
 import dashboardService from "../../../../core/services/dashboard.service";
 import ScaleLoader from "react-spinners/ScaleLoader";
-
+import AuthService from "../../../../core/services/auth.service";
 
 // import ChartDataLabels from 'chartjs-plugin-datalabels';
 
@@ -33,16 +34,23 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 // Chart.plugins.unregister(ChartDataLabels);
 
 function CustomerDashboard() {
+  const navigate = useNavigate();
     const [totalItems, setTotalItems] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 	const [showLoader, setisLoader] = useState(false);
 	const [sorting, setSorting] = useState({ field: "", order: "" });
 	const [search, setSearch] = useState("");
     const [stat, setStat] = useState([]);
+    const { currentUser , logout ,hamburger } = useAuthContext();
 	const { isFetchResult,fetchResult} = useRecordStatusContext();
 	const [lastFiveTransaction, setLastFiveTransaction] = useState([]);
     const [userRecord , setUserRecord] = useState([])
-    
+    const logOut = () => {
+      AuthService.logout();
+      logout();
+      navigate("/auth");
+      // window.location.reload();
+    };
     // const fetchData = async () => {
     //   const API_URL2 = process.env.REACT_APP_BaseApi_URL;
     //   const response = await fetch(API_URL2 + "barReport", {
@@ -72,6 +80,7 @@ function CustomerDashboard() {
   const headers = [
 	  { name: "No#", field: "id", sortable: false },
 	  { name: "Transactions ID", field: "Transid", sortable: true },
+    { name: "Narration", field: "actionIn", sortable: true },
 	  { name: "Amount", field: "amount", sortable: true },
 	  { name: "Status", field: "status", sortable: true },
 	  { name: "Date", field: "transDate", sortable: false }
@@ -91,13 +100,21 @@ function CustomerDashboard() {
                 console.log(response?.topFiveTransactionInformation)
                 setLastFiveTransaction(response?.topFiveTransactionInformation)
                 setUserRecord(response?.userInformation)
+                setStat(response?.AllTransactions);
              
                 
-        		//         
+               //console.log("hello response............",response)       
         			 })
-             .catch(err => 
+             .catch((err) =>{
+              // console.log(err)
+              if(err?.response?.data?.code === 401){
+                logOut();
+             //   console.log("hello error............",err)
+              }
+             // console.log("hello error............",err)
+             } 
                 
-                console.log(err)
+               
                 
                 )
              
@@ -193,7 +210,7 @@ return (
 										</div>
 									</div>
 									<h1 className="display-5 mt-1 mb-3">${userRecord?.balance}</h1>
-                                    <div className="mb-0">
+                                    <div className="mb-0">Routing Number
 										<span className="text-danger"> <i className="mdi mdi-arrow-bottom-right"></i> {userRecord?.routing_no} </span>
 										
 									</div>
@@ -233,19 +250,19 @@ return (
 								<div className="card-body">
 
 								<ResponsiveContainer width="100%" height={185}>
-                                <LineChart width={600} height={300} data={data}  margin={{
+                                <LineChart width={600} height={300} data={stat}  margin={{
                            top: 5,
                            right: 30,
                       left: 20,
                        bottom: 5,
           }}>
-             <XAxis dataKey="name" />
+             <XAxis dataKey="createdAt" />
             <YAxis />
             <CartesianGrid stroke="#ccc" />
              <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+            <Line type="monotone" dataKey="amount" stroke="#8884d8" />
+            {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
             </LineChart>   
           </ResponsiveContainer> 
              
@@ -281,11 +298,16 @@ return (
                                            <>
                                             { commentsData2 ? (                                      
                                               commentsData2.map((result, index) => {
+                                               let narra = JSON.parse(result?.actionIn)
                                                  return <tr key={result.id}>
                                                     <td style={{marginLeft:"900px"}}>{index}</td>
-                                                    <td>{result?.TransIncurrentDate}</td>
+                                                    <td>{result?.transaction_ref}</td> 
+                                                    <td>{narra["drRemarks"]}</td>
                                                     <td>{result?.amountIn}</td>
-                                                    <td>{result?.id}</td> 
+                                                    <td>{result?.transferIn_status}</td>
+                                                    {/* <td>{result?.TransIncurrentDate}</td> */}
+                                                  
+                                                  
                                                    
                                                  
                                                      <td>{new Date(result.createdAt).toLocaleString()}</td>

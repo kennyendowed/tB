@@ -7,6 +7,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2'
+import logo from "../../../assets/welcome/assets/img/logo.jpg";
 
 const TransferFunds = (props) => {
   const INITIAL_VALUE = {
@@ -73,7 +74,25 @@ const TransferFunds = (props) => {
        
 	
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{
+     
+        let Msg = () => (
+          <div>
+            <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+            <p> {err?.response?.data?.message} </p>
+          </div>
+        )
+        toast.error(Msg, {
+          position: "top-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTokenLoader(false);
+      });
   };
   const verifyToken2 = () => {
     console.log("true");
@@ -96,7 +115,24 @@ const TransferFunds = (props) => {
         }
 	
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{
+        let Msg = () => (
+          <div>
+            <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+            <p> {err?.response?.data?.message} </p>
+          </div>
+        )
+        toast.error(Msg, {
+          position: "top-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTokenLoader(false);
+      });
   };
   const verifyToken3 = () => {
     console.log("true");
@@ -119,7 +155,24 @@ const TransferFunds = (props) => {
         }
 	
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{
+        let Msg = () => (
+          <div>
+            <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+            <p> {err?.response?.data?.message} </p>
+          </div>
+        )
+        toast.error(Msg, {
+          position: "top-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTokenLoader(false);
+      });
   };
   const verifyToken4 = () => {
     console.log("true");
@@ -142,7 +195,24 @@ const TransferFunds = (props) => {
         }
 	
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{
+        let Msg = () => (
+          <div>
+            <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+            <p> {err?.response?.data?.message} </p>
+          </div>
+        )
+        toast.error(Msg, {
+          position: "top-right",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTokenLoader(false);
+      });
   };
   const verifyToken5 = () => {
     console.log("true");
@@ -164,7 +234,7 @@ const TransferFunds = (props) => {
       .verifyToken(payload)
       .then((response) => {
         setTokenLoader(false);
-        console.log(response);
+      
         toast.success(response.message)
         if(response.message === 'otp valid'){
          return  dashboardService.TransferFunds(payload2)
@@ -182,12 +252,49 @@ const TransferFunds = (props) => {
          
            }
          })
-         .catch((e) => console.log(e))
+         .catch((e) =>{
+          console.log("dsgdgsdgsdfgsdsdfsdfsdfsf",e)
+          let Msg = () => (
+            <div>
+              <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+              <p> {e?.response?.data?.message} </p>
+            </div>
+          )
+          toast.error(Msg, {
+            position: "top-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setTokenLoader(false);
+      
+         })
+      
          
         }
 	
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        let Msg = () => (
+            <div>
+              <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+              <p> {err?.response?.data?.message} </p>
+            </div>
+          )
+          toast.error(Msg, {
+            position: "top-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setTokenLoader(false);
+      });
   };
   const handlefirstShow = () => {
     console.log(data);

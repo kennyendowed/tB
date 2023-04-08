@@ -41,9 +41,26 @@ function Login() {
         },
         (ex) => {
           setisLoader(false)
-      
+      console.log(ex)
           if (ex?.response?.data?.type === "firstLogin") {
             navigate("/auth/chnangePassword");
+          }
+          if(ex?.response?.data?.status === "FALSE"){
+            let Msg = () => (
+              <div>
+                <img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+                <p> {ex?.response?.data?.message} </p>
+              </div>
+            )
+            toast.error(Msg, {
+              position: "top-right",
+              autoClose: 10000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
           }
           if (typeof ex.response?.data?.data != 'string') {
             for (let err in ex.response?.data?.data) {

@@ -17,8 +17,8 @@ const Sidebar = (props) => {
   
 
   //const role = JSON.parse(sessionStorage.getItem("role"))
-  console.log(currentUser)
-  console.log(currentUser?.rolesss)
+  // console.log(currentUser)
+  // console.log(currentUser?.rolesss)
   const logOut = () => {
     AuthService.logout();
     logout();
@@ -65,9 +65,9 @@ const Sidebar = (props) => {
                         <i className="align-middle me-2 fas fa-fw fa-flask"></i> <span className="align-middle">Settings</span>
                       </a>
                       <ul id="ui" className={!toggleMenu ? "sidebar-dropdown list-unstyled collapse " : "sidebar-dropdown list-unstyled collapse show"} data-bs-parent="#sidebar">
-                        <li className="sidebar-item">
+                        {/* <li className="sidebar-item">
                           <Link to={"/settings/update-Profile"} className="sidebar-link">Update Profile </Link>
-                        </li>
+                        </li> */}
                         <li className="sidebar-item">  <Link to={"/settings/update-Password"} className="sidebar-link">Change Password </Link></li>
 
                       </ul>

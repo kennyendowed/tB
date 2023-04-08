@@ -17,13 +17,15 @@ import { ScaleLoader } from "react-spinners";
         const { isFetchResult,fetchResult} = useRecordStatusContext();
         const [allTransactions, setAllTransaction] = useState([]);
         const ITEMS_PER_PAGE = 20;
-  const headers = [
-	  { name: "No#", field: "id", sortable: false },
-	  { name: "Transactions ID", field: "Transid", sortable: true },
-	  { name: "Amount", field: "amount", sortable: true },
-	  { name: "Status", field: "status", sortable: true },
-	  { name: "Date", field: "transDate", sortable: false }
-  ];
+        const headers = [
+            { name: "No#", field: "id", sortable: false },
+            { name: "Transactions ID", field: "Transid", sortable: true },
+          { name: "Narration", field: "actionIn", sortable: true },
+            { name: "Amount", field: "amount", sortable: true },
+            { name: "Status", field: "status", sortable: true },
+            { name: "Date", field: "transDate", sortable: false }
+        ];
+      
   useEffect(() => {
 	setisLoader(true)
 	var arData = {
@@ -107,18 +109,21 @@ import { ScaleLoader } from "react-spinners";
                                        <>
                                         { commentsData2 ? (                                      
                                             commentsData2.map((result, index) => {
+                                                let narra = JSON.parse(result?.actionIn)
                                                 return <tr key={result.id}>
-                                                    <td style={{marginLeft:"900px"}}>{index}</td>
-                                                    <td>{result?.TransIncurrentDate}</td>
-                                                    <td>{result?.amountIn}</td>
-                                                    <td>{result?.id}</td> 
-                                                    
-                                                    <td>{new Date(result.createdAt).toLocaleString() //undefined ,options
-                                                    
-                                                    
-                                                    }</td>
+                                                   <td style={{marginLeft:"900px"}}>{index}</td>
+                                                   <td>{result?.transaction_ref}</td> 
+                                                   <td>{narra["drRemarks"]}</td>
+                                                   <td>{result?.amountIn}</td>
+                                                   <td>{result?.transferIn_status}</td>
+                                                   {/* <td>{result?.TransIncurrentDate}</td> */}
+                                                 
+                                                 
                                                   
-                                                </tr>
+                                                
+                                                    <td>{new Date(result.createdAt).toLocaleString()}</td>
+                                                  
+                                               </tr>
                                             })  ) : (
                                             <>
                                             <tr>
