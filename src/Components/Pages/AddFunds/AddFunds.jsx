@@ -17,7 +17,11 @@ import Swal from "sweetalert2";
 		const [ isLoading , setIsLoading] = useState("")
 		const [accountNumber , setAccountNumber] = useState("")
 
-
+		const convertDateFormat =(dateString) => {
+			const dateParts = dateString.split('-');
+			return dateParts[2] + '/'+ dateParts[1] + '/' + dateParts[0] ;
+		  }
+	  const formatedDate = convertDateFormat(date)
     const addfunds = (e) =>{
 		e.preventDefault()
 		if(requestStatus === "" ||
@@ -37,7 +41,7 @@ import Swal from "sweetalert2";
 			amount,
 			requestType,
 			narration,
-			date,
+			date : formatedDate ,
 			accountNumber
 		}
 		console.log(payload)
@@ -166,7 +170,7 @@ import Swal from "sweetalert2";
 										</div>
 										<div className="row mb-3">
 										    <div className="mb-3 col-md-6">
-											 <label >Enter Amount</label>
+											 <label >Enter Date</label>
 											  <input 
 											  type="date" 
 											  className="form-control" 

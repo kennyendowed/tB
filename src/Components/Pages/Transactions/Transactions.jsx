@@ -102,7 +102,7 @@ import { ScaleLoader } from "react-spinners";
                                     <tbody className="h-auto">
                                     {
                                         showLoader ?
-                                        <div className="position-absolute w-100 h-100 d-flex justify-content-center align-items-center ">
+                                         <div className="text-center pagination-centered mx-auto ">
                                             <ScaleLoader color="#3838d6" className="mx-auto" />
                                          </div> :
 
