@@ -450,12 +450,12 @@ const TransferFunds = (props) => {
             <Modal.Title>40% to completion</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <label>OTP</label>
+            <label>Request Transfer Otp</label>
             <input
               type="text"
               className="form-control"
               id="inputAddress2"
-              placeholder="Enter Otp"
+              placeholder="Transfer Otp"
               value={otp}
               onChange = {(e) => {setOtp(e.target.value)}}
             />
@@ -480,12 +480,12 @@ const TransferFunds = (props) => {
             <Modal.Title>60% to completion </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <label>OTP</label>
+            <label>Request Authourization Code</label>
             <input
               type="text"
               className="form-control"
               id="inputAddress2"
-              placeholder="Enter Otp"
+              placeholder="Authourization Code"
               value={otp}
               onChange = {(e) => {setOtp(e.target.value)}}
             />
@@ -510,19 +510,19 @@ const TransferFunds = (props) => {
             <Modal.Title>80% to completion</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <label>OTP</label>
+            <label>Clear Funds Code</label>
             <input
               type="text"
               className="form-control"
               id="inputAddress2"
-              placeholder="Enter Otp"
+              placeholder="Funds Code"
               value={otp}
               onChange = {(e) => {setOtp(e.target.value)}}
             />
           </Modal.Body>
           <Modal.Footer>
             <a variant="primary" onClick={() => requestOtp()}>
-              Request OTP
+              Complete Transfer Code
             </a>
             <Button variant="secondary"
             onClick={() => verifyToken4()}
@@ -542,12 +542,12 @@ const TransferFunds = (props) => {
             <Modal.Title>20% to completion</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <label>OTP</label>
+            <label>Transfer authorization code</label>
             <input
               type="text"
               className="form-control"
               id="inputAddress2"
-              placeholder="Enter Otp"
+              placeholder="Transfer authorization code"
               value={otp}
 			       onChange = {(e)=> setOtp(e.target.value)}
             />
@@ -572,7 +572,7 @@ const TransferFunds = (props) => {
             <Modal.Title>100% to completion</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <label>OTP</label>
+            <label>Complete Transfer Code</label>
             <input
               type="text"
               className="form-control"
