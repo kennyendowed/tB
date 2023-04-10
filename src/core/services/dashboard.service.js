@@ -44,8 +44,11 @@ const transferPin =() =>{
   return axios.get(API_URL2 + "transferPin", { headers: authHeader() });
 }
 
-const fetchAllDeparment =() =>{
-  return axios.get(API_URL2 + "GetDeparment", { headers: authHeader() });
+const addFunds =(payload) =>{
+  return axios.post(API_URL2 + "aadFund",payload, {headers: authHeader()})
+  .then((response) => {
+      return response.data;
+  });
 }
 
 const fetchAllsDeparment =() =>{
@@ -137,7 +140,7 @@ const dashboardService = {
   fetchTreatedRequests,
   fetchAllsDeparment,
 
-  fetchAllDeparment,
+  addFunds,
   fetchPendingRequests,
   fetchExistedUsers,
   TransferFunds,
