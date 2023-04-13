@@ -450,6 +450,20 @@ const TransferFunds = (props) => {
             <Modal.Title>40% to completion</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          <div className="progress" style = {{ height: "8px"}}>
+                 <div 
+                 className="progress-bar progress-bar-striped progress-bar-animated" 
+                 role="progressbar" 
+                 aria-label="Animated striped example" 
+                 aria-valuenow="40" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100" 
+                 style={{ width: "40%", border:"1px" }}
+                 >
+                 
+                 
+                 </div>
+            </div>
             <label>Request Transfer Otp</label>
             <input
               type="text"
@@ -480,6 +494,20 @@ const TransferFunds = (props) => {
             <Modal.Title>60% to completion </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+          <div className="progress" style = {{ height: "8px"}}>
+                 <div 
+                 className="progress-bar progress-bar-striped progress-bar-animated" 
+                 role="progressbar" 
+                 aria-label="Animated striped example" 
+                 aria-valuenow="60" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100" 
+                 style={{ width: "60%", border:"1px" }}
+                 >
+                 
+                 
+                 </div>
+            </div>
             <label>Request Authourization Code</label>
             <input
               type="text"
@@ -508,8 +536,25 @@ const TransferFunds = (props) => {
         >
           <Modal.Header closeButton>
             <Modal.Title>80% to completion</Modal.Title>
+             <div className="progress">
+                 <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            </div>
           </Modal.Header>
           <Modal.Body>
+          <div className="progress" style = {{ height: "8px"}}>
+                 <div 
+                 className="progress-bar progress-bar-striped progress-bar-animated" 
+                 role="progressbar" 
+                 aria-label="Animated striped example" 
+                 aria-valuenow="80" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100" 
+                 style={{ width: "80%", border:"1px" }}
+                 >
+                 
+                 
+                 </div>
+            </div>
             <label>Clear Funds Code</label>
             <input
               type="text"
@@ -539,9 +584,31 @@ const TransferFunds = (props) => {
           size="md"
         >
           <Modal.Header closeButton>
-            <Modal.Title>20% to completion</Modal.Title>
+            <Modal.Title>
+            
+              20% to completion
+              
+            </Modal.Title>
+           
+           
+            
           </Modal.Header>
           <Modal.Body>
+                <div className="progress" style = {{ height: "8px"}}>
+                 <div 
+                 className="progress-bar progress-bar-striped progress-bar-animated" 
+                 role="progressbar" 
+                 aria-label="Animated striped example" 
+                 aria-valuenow="20" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100" 
+                 style={{ width: "20%", border:"1px" }}
+                 >
+                 
+                 
+                 </div>
+            </div>
+            
             <label>Transfer authorization code</label>
             <input
               type="text"
@@ -570,8 +637,23 @@ const TransferFunds = (props) => {
         >
           <Modal.Header closeButton>
             <Modal.Title>100% to completion</Modal.Title>
+          
           </Modal.Header>
           <Modal.Body>
+          <div className="progress" style = {{ height: "8px"}}>
+                 <div 
+                 className="progress-bar progress-bar-striped progress-bar-animated" 
+                 role="progressbar" 
+                 aria-label="Animated striped example" 
+                 aria-valuenow="100" 
+                 aria-valuemin="0" 
+                 aria-valuemax="100" 
+                 style={{ width: "100%", border:"1px" }}
+                 >
+                 
+                 
+                 </div>
+            </div>
             <label>Complete Transfer Code</label>
             <input
               type="text"
