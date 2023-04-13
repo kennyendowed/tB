@@ -29,7 +29,8 @@ import Swal from "sweetalert2";
 		    requestStatus === "" ||
 			 requestType === "" ||
 			  accountNumber === "" || 
-			  date === ""
+			  date === ""||
+			  narration === ""
 			  ){
 			
 
@@ -163,8 +164,8 @@ import Swal from "sweetalert2";
 											 >
 											    <option value = ""> -- Select -- </option>
 											    <option value = "Transfer">Transfer</option>
-												<option value = "Withdraw"> Withdraw</option>
-												<option value = "Deposit"> Deposit</option>
+												<option value = "Credit"> Credit</option>
+												<option value = "Debit"> Debit</option>
 											 </select>
 										  </div>
 										</div>
