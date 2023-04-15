@@ -47,9 +47,14 @@ const TransferFunds = (props) => {
 		const Otp =response.data.data[0].ot
 		if(Otp){
 			toast.success("otp has been sent")
+     
 		}
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>{
+         setisLoader(false)
+         console.log(err)
+      
+  });
   };
   const verifyToken = () => {
     console.log("true");
@@ -476,7 +481,7 @@ const TransferFunds = (props) => {
           </Modal.Body>
           <Modal.Footer>
             <a  onClick={() => requestOtp()}>
-              Request OTP
+            {showLoader ? <PulseLoader color = "#000000"/> : "Request OTP"}
             </a>
             <Button variant="secondary" onClick={() => verifyToken2()}>
             {tokenLoader ? <PulseLoader/> : "Verify OTP"}
@@ -520,7 +525,7 @@ const TransferFunds = (props) => {
           </Modal.Body>
           <Modal.Footer>
             <a variant="primary" onClick={() => requestOtp()}>
-              Request OTP
+            {showLoader ? <PulseLoader color = "#000000"/> : "Request OTP"}
             </a>
             <Button variant="secondary" onClick={() => verifyToken3()} >
             {tokenLoader ? <PulseLoader/> : "Verify OTP"}
@@ -567,7 +572,7 @@ const TransferFunds = (props) => {
           </Modal.Body>
           <Modal.Footer>
             <a variant="primary" onClick={() => requestOtp()}>
-              Complete Transfer Code
+            {showLoader ? <PulseLoader color = "#000000"/> : "Request OTP"}
             </a>
             <Button variant="secondary"
             onClick={() => verifyToken4()}
@@ -621,7 +626,7 @@ const TransferFunds = (props) => {
           </Modal.Body>
           <Modal.Footer>
             <a className=""  onClick={() => requestOtp()}>
-              Request OTP
+            {showLoader ? <PulseLoader color = "#000000"/> : "Request OTP"}
             </a>
             <Button variant="secondary" onClick = {()=>verifyToken()} >
               {tokenLoader ? <PulseLoader/> : "Verify OTP"}
@@ -666,7 +671,7 @@ const TransferFunds = (props) => {
           </Modal.Body>
           <Modal.Footer>
             <a  onClick={() => requestOtp()}>
-              Request OTP
+            {showLoader ? <PulseLoader color = "#000000"/> : "Request OTP"}
             </a>
             <Button 
             variant="secondary"

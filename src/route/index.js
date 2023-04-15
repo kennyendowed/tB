@@ -18,7 +18,7 @@ import TransferFunds from "../Components/Pages/TransferFunds";
 import Transactions from "../Components/Pages/Transactions";
 import LoginPage from "../views/authentication";
 // import BatchApproval from "../Components/Pages/BatchApproval";
-
+import CustomerDetails from "../Components/Pages/CustomerDetails"
 //router routes
 import WelcomePage from "../views/welcome";
 import About from "../views/about";
@@ -39,6 +39,7 @@ const MainRoutes = () => (
 				<Route path = "/addFunds" element ={<AddFunds/>}/>
 				<Route path = "/transferFunds" element ={<TransferFunds/>}/>
 				<Route path = "/Transactions" element ={<Transactions/>}/>
+				<Route path = "/customerDetails" element ={<CustomerDetails/>} />
 				<Route path="/settings" element={<SettingsPage />} >
 				  <Route path="/settings/update-Profile" element={<SettingsPage />} /> 
 				  <Route path="/settings/update-Password" element={<SettingsPage />} /> 
