@@ -1,5 +1,5 @@
 import React, { useEffect, useState,createContext,useMemo } from "react";
-import "./Transactions.css";
+import "./CustomerDetails.css";
 import { useRecordStatusContext } from "../../../core/modules";
 import { TableHeader, Pagination, Search } from "../../DataTable";
 import LoadingLogo from "../../LoadingLogo";
@@ -7,7 +7,7 @@ import dashboardService from "../../../core/services/dashboard.service";
 import { ScaleLoader } from "react-spinners";
 
 
-    const Transactions = (props) => {
+    const CustomerDetails = (props) => {
         const [totalItems, setTotalItems] = useState(0);
         const [currentPage, setCurrentPage] = useState(1);
         const [showLoader, setisLoader] = useState(false);
@@ -19,11 +19,12 @@ import { ScaleLoader } from "react-spinners";
         const ITEMS_PER_PAGE = 20;
         const headers = [
             { name: "No#", field: "id", sortable: false },
-            { name: "Transactions ID", field: "Transid", sortable: true },
-             { name: "Narration", field: "actionIn", sortable: true },
-            { name: "Amount", field: "amount", sortable: true },
-            { name: "Status", field: "status", sortable: true },
-            { name: "Date", field: "transDate", sortable: false }
+            { name: "Customer ID", field: "customer_id", sortable: true },
+             { name: "Email", field: "email", sortable: true },
+            { name: "First Name", field: "first_name", sortable: true },
+            { name: "Last Name", field: "last_name", sortable: true },
+            { name: "Account Number", field: "account_no", sortable: false },
+            { name : "Send Otp" }
         ];
       
   useEffect(() => {
@@ -31,7 +32,7 @@ import { ScaleLoader } from "react-spinners";
 	var arData = {
 		Department: 'null'
 	  }
-	dashboardService.fetchAllTransactionRecords().then(
+	dashboardService.fetchAllCustomerAccounts().then(
 		(response) => {
             console.log(response)
 				setAllTransaction(response);
@@ -79,7 +80,7 @@ import { ScaleLoader } from "react-spinners";
         <> 
 <div className="header">
 						<h1 className="header-title">
-						Transactions history
+						 Customer Details
 						</h1>
 						
 					</div>
@@ -109,19 +110,19 @@ import { ScaleLoader } from "react-spinners";
                                        <>
                                         { commentsData2 ? (                                      
                                             commentsData2.map((result, index) => {
-                                                let narra = JSON.parse(result?.actionIn)
+                                                // let narra = JSON.parse(result?.actionIn)
                                                 return <tr key={result.id}>
                                                    <td style={{marginLeft:"900px"}}>{index}</td>
-                                                   <td>{result?.transaction_ref}</td> 
-                                                   <td>{narra["drRemarks"]}</td>
-                                                   <td>{result?.amountIn}</td>
-                                                   <td>{result?.transferIn_status}</td>
+                                                   <td>{result?.customer_id}</td> 
+                                                   <td>{result?.email}</td>
+                                                   <td>{result?.first_name}</td>
+                                                   <td>{result?.last_name}</td>
+                                                   <td>{result?.account_no}</td>
                                                    {/* <td>{result?.TransIncurrentDate}</td> */}
-                                                 
-                                                 
-                                                  
-                                                
-                                                    <td>{new Date(result.createdAt).toLocaleString()}</td>
+                                                    <td>
+         
+                                                           <button className="btn btn-primary" onClick={() => alert('Button clicked!')}>Click Me</button>
+                                                   </td>
                                                   
                                                </tr>
                                             })  ) : (
@@ -161,4 +162,4 @@ import { ScaleLoader } from "react-spinners";
 
 
 
-export default Transactions;
+export default CustomerDetails;

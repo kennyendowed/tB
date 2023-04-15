@@ -22,6 +22,13 @@ const fetchAllTransactionRecords = () => {
 });
   // return fetch(API_URL + "/getAllExistedRMS", { method: 'GET', headers: authHeader()});
 };
+const fetchAllCustomerAccounts = () => {
+  return axios.get(API_URL2 + "FetchAllCustomerAccounts", { headers: authHeader() })
+  .then((response) => {
+      return response.data.data;
+});
+  // return fetch(API_URL + "/getAllExistedRMS", { method: 'GET', headers: authHeader()});
+};
 
 const fetchExistedUsers = () => {
   return axios.get(API_URL2 + "GetAllStatusCount", { headers: authHeader() });
@@ -152,6 +159,7 @@ const dashboardService = {
   fetchUserRecords,
   transferPin,
   verifyToken,
+  fetchAllCustomerAccounts,
 };
 
 export default dashboardService;
