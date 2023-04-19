@@ -142,6 +142,11 @@ const emailOtpRequest = async (email , id) =>{
                                         <LoadingLogo  title="Hello, world!" text="Please hold while we fetch records."/>
                                         )} */}
                             <div className="table-responsive position-relative">
+                            {
+                                        showLoader ?
+                                         <div className="text-center pagination-centered mx-auto ">
+                                            <ScaleLoader color="#3838d6" className="mx-auto" />
+                                         </div> :
                                 <table className="table align-items-center mb-0">
                                     <TableHeader
                                         headers={headers}
@@ -150,13 +155,9 @@ const emailOtpRequest = async (email , id) =>{
                                         }
                                     />
                        
-                                    <tbody className="h-auto">
-                                    {/* {
-                                        showLoader ?
-                                         <div className="text-center pagination-centered mx-auto ">
-                                            <ScaleLoader color="#3838d6" className="mx-auto" />
-                                         </div> : */}
-
+                                  
+                                   
+                                        <tbody className="h-auto">
                                        <>
                                         { commentsData2 ? (                                      
                                             commentsData2.map((result, index) => {
@@ -186,10 +187,12 @@ const emailOtpRequest = async (email , id) =>{
                                               )
                                         } 
                                         </>
-                                     {/* } */}
+                                        </tbody>
+                                   
 
-                                    </tbody>
+                                   
                                 </table>
+                                  }
                             </div>
                             <div className="col-lg-6 col-5 my-auto text-end">
                                     <Pagination
