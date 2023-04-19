@@ -42,11 +42,12 @@ const TransferFunds =(payload) =>{
   });
 }
 
-const emailOtpRequest =(payload) =>{
-  return axios.get(API_URL2 + "transferPin", payload , {headers: authHeader()})
+const emailOtpRequest =async(payload) =>{
+  return axios.post(API_URL2 + "transferPin",payload , { headers: authHeader() })
   .then((response) => {
-      return response.data;
+    return response.data;
   });
+
 }
 const verifyToken =(payload) =>{
   return axios.post(API_URL2 + "ValidatetransferPin",payload, {headers: authHeader()})
