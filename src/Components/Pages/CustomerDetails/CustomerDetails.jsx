@@ -5,9 +5,13 @@ import { TableHeader, Pagination, Search } from "../../DataTable";
 import LoadingLogo from "../../LoadingLogo";
 import dashboardService from "../../../core/services/dashboard.service"; 
 import { ScaleLoader } from "react-spinners";
+import PulseLoader from "react-spinners/PulseLoader";
+import axios from "axios";
 
+const API_URL2 = process.env.REACT_APP_BaseApi_URL;
 
     const CustomerDetails = (props) => {
+        const user = JSON.parse(localStorage.getItem("token"));
         const [totalItems, setTotalItems] = useState(0);
         const [currentPage, setCurrentPage] = useState(1);
         const [showLoader, setisLoader] = useState(false);
@@ -16,6 +20,8 @@ import { ScaleLoader } from "react-spinners";
         const [stat, setStat] = useState([]);
         const { isFetchResult,fetchResult} = useRecordStatusContext();
         const [allTransactions, setAllTransaction] = useState([]);
+        const [isLoading ,setIsLoading ] = useState(false)
+        const [customerId , setCustomerId] =useState("")
         const ITEMS_PER_PAGE = 20;
         const headers = [
             { name: "No#", field: "id", sortable: false },
@@ -76,6 +82,50 @@ import { ScaleLoader } from "react-spinners";
 
 }, [allTransactions, currentPage, search, sorting]);
 
+
+const emailOtpRequest = async (email , id) =>{
+    setCustomerId(id)
+    const payload = {
+        email : email
+    }
+
+    console.log(payload)
+  
+    setIsLoading(true)
+    try{
+     const  response = await axios.get(API_URL2 + "transferPin" , payload,
+     {
+        headers:{
+          "Authorization": 'Bearer ' + user,
+          
+        }
+      }
+      
+     )
+     console.log(response)
+
+    }
+     catch(e){
+        console.log(e)
+
+     }
+     finally{
+        setIsLoading(false)
+     }
+    // dashboardService.emailOtpRequest(payload).then(
+	// 	(response) => {
+    //         console.log(response)
+    //         console.log(response?.data?.code)
+	// 			// setAllTransaction(response);
+			        
+    //         setIsLoading(false)
+	// 			 })  
+    //    .catch((e)=>{
+    //         console.log(e)
+    //    })
+    
+
+}
     return (
         <> 
 <div className="header">
@@ -121,7 +171,10 @@ import { ScaleLoader } from "react-spinners";
                                                    {/* <td>{result?.TransIncurrentDate}</td> */}
                                                     <td>
          
-                                                           <button className="btn btn-primary" onClick={() => alert('Button clicked!')}>Click Me</button>
+                                                           <button className="btn btn-primary" onClick={() => emailOtpRequest(result.email,result.customer_id)}>
+                                                             {isLoading && result?.customer_id === customerId ? <PulseLoader/> : "Send Otp"}
+                                                           
+                                                           </button>
                                                    </td>
                                                   
                                                </tr>
