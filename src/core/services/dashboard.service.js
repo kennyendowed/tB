@@ -41,6 +41,13 @@ const TransferFunds =(payload) =>{
       return response.data;
   });
 }
+
+const emailOtpRequest =(payload) =>{
+  return axios.get(API_URL2 + "transferPin", payload , {headers: authHeader()})
+  .then((response) => {
+      return response.data;
+  });
+}
 const verifyToken =(payload) =>{
   return axios.post(API_URL2 + "ValidatetransferPin",payload, {headers: authHeader()})
   .then((response) => {
@@ -160,6 +167,7 @@ const dashboardService = {
   transferPin,
   verifyToken,
   fetchAllCustomerAccounts,
+  emailOtpRequest
 };
 
 export default dashboardService;
