@@ -35,8 +35,16 @@ const TransferFunds = (props) => {
   const [isValid, setIsValid] = useState(false);
   const [showLoader, setisLoader] = useState(false);
   const [tokenLoader , setTokenLoader] = useState(false)
-  const requestOtp = () => {
-    console.log("true");
+  const requestOtp = () =>{
+    Swal.fire({
+      title: 'Successful',
+      text: "kindly contact the bank for activation code bank@trustbank.com customercare",
+      icon: 'success',
+      
+    })
+  }
+  const requestOtp1 = () => {
+   
     setisLoader(true);
     dashboardService
       .transferPin()
