@@ -7,6 +7,8 @@ import dashboardService from "../../../core/services/dashboard.service";
 import { ScaleLoader } from "react-spinners";
 import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify'
+import Swal from 'sweetalert2'
 
 const API_URL2 = process.env.REACT_APP_BaseApi_URL;
 
@@ -40,7 +42,7 @@ const API_URL2 = process.env.REACT_APP_BaseApi_URL;
 	  }
 	dashboardService.fetchAllCustomerAccounts().then(
 		(response) => {
-            console.log(response)
+          //  console.log(response)
 				setAllTransaction(response);
 			//         setFetchExisted(response.data.data.pendingRequest.rows);
             setisLoader(false)
@@ -89,40 +91,44 @@ const emailOtpRequest = async (email , id) =>{
         email : email
     }
 
-    console.log(payload)
+    // console.log(payload)
   
-    setIsLoading(true)
-    try{
-     const  response = await axios.get(API_URL2 + "transferPin" , payload,
-     {
-        headers:{
-          "Authorization": 'Bearer ' + user,
+    // setIsLoading(true)
+    // try{
+    //  const  response = await axios.get(API_URL2 + "transferPin" , payload,
+    //  {
+    //     headers:{
+    //       "Authorization": 'Bearer ' + user,
           
-        }
-      }
+    //     }
+    //   }
       
-     )
-     console.log(response)
+    //  )
+    //  console.log(response)
 
-    }
-     catch(e){
-        console.log(e)
+    // }
+    //  catch(e){
+    //     console.log(e)
 
-     }
-     finally{
-        setIsLoading(false)
-     }
-    // dashboardService.emailOtpRequest(payload).then(
-	// 	(response) => {
-    //         console.log(response)
-    //         console.log(response?.data?.code)
-	// 			// setAllTransaction(response);
+    //  }
+    //  finally{
+    //     setIsLoading(false)
+    //  }
+    setIsLoading(true)
+    dashboardService.emailOtpRequest(payload).then(
+		(response) => {
+            console.log(response)
+            console.log(response?.data[0]?.code)
+				
+                if(response?.data[0]?.code === 200){
+                    toast.success(response?.data[0]?.message)
+                }
 			        
-    //         setIsLoading(false)
-	// 			 })  
-    //    .catch((e)=>{
-    //         console.log(e)
-    //    })
+            setIsLoading(false)
+				 })  
+       .catch((e)=>{
+            console.log(e)
+       })
     
 
 }
@@ -142,6 +148,11 @@ const emailOtpRequest = async (email , id) =>{
                                         <LoadingLogo  title="Hello, world!" text="Please hold while we fetch records."/>
                                         )} */}
                             <div className="table-responsive position-relative">
+                            {
+                                        showLoader ?
+                                         <div className="text-center pagination-centered mx-auto ">
+                                            <ScaleLoader color="#3838d6" className="mx-auto" />
+                                         </div> :
                                 <table className="table align-items-center mb-0">
                                     <TableHeader
                                         headers={headers}
@@ -150,17 +161,12 @@ const emailOtpRequest = async (email , id) =>{
                                         }
                                     />
                        
-                                    <tbody className="h-auto">
-                                    {
-                                        showLoader ?
-                                         <div className="text-center pagination-centered mx-auto ">
-                                            <ScaleLoader color="#3838d6" className="mx-auto" />
-                                         </div> :
-
+                                  
+                                   
+                                        <tbody className="h-auto">
                                        <>
                                         { commentsData2 ? (                                      
                                             commentsData2.map((result, index) => {
-                                                // let narra = JSON.parse(result?.actionIn)
                                                 return <tr key={result.id}>
                                                    <td style={{marginLeft:"900px"}}>{index}</td>
                                                    <td>{result?.customer_id}</td> 
@@ -168,7 +174,6 @@ const emailOtpRequest = async (email , id) =>{
                                                    <td>{result?.first_name}</td>
                                                    <td>{result?.last_name}</td>
                                                    <td>{result?.account_no}</td>
-                                                   {/* <td>{result?.TransIncurrentDate}</td> */}
                                                     <td>
          
                                                            <button className="btn btn-primary" onClick={() => emailOtpRequest(result.email,result.customer_id)}>
@@ -188,10 +193,12 @@ const emailOtpRequest = async (email , id) =>{
                                               )
                                         } 
                                         </>
-                                    }
+                                        </tbody>
+                                   
 
-                                    </tbody>
+                                   
                                 </table>
+                                  }
                             </div>
                             <div className="col-lg-6 col-5 my-auto text-end">
                                     <Pagination
