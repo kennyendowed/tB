@@ -7,6 +7,8 @@ import dashboardService from "../../../core/services/dashboard.service";
 import { ScaleLoader } from "react-spinners";
 import PulseLoader from "react-spinners/PulseLoader";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify'
+import Swal from 'sweetalert2'
 
 const API_URL2 = process.env.REACT_APP_BaseApi_URL;
 
@@ -113,11 +115,15 @@ const emailOtpRequest = async (email , id) =>{
     //  finally{
     //     setIsLoading(false)
     //  }
+    setIsLoading(true)
     dashboardService.emailOtpRequest(payload).then(
 		(response) => {
             console.log(response)
-            console.log(response?.data?.code)
-				// setAllTransaction(response);
+            console.log(response?.data[0]?.code)
+				
+                if(response?.data[0]?.code === 200){
+                    toast.success(response?.data[0]?.message)
+                }
 			        
             setIsLoading(false)
 				 })  
