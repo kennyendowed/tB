@@ -2,7 +2,7 @@ import React from "react";
 import "./welcome.css"
 import img2 from "../../assets/welcome/assets/img/banner-image/banner-bg.jpg";
 import Navbar from "../../Components/Layout/navbar";
-
+import TradingViewWidget from "../../Components/Pages/TradingViewWidget";
 
 import { useNavigate, Link,useLocation } from "react-router-dom";
 
@@ -202,7 +202,18 @@ import { useNavigate, Link,useLocation } from "react-router-dom";
             </div>
         </section>
      
-     
+		<section className="funfacts-area ptb-70 pt-0">
+			<div className="container">
+            <div className="section-title">
+					<h2>Foreign Exchange Rates</h2>
+					<div className="bar"></div>
+					<p>Get live foreign exchange rates</p>
+				</div>
+        <TradingViewWidget />
+
+        </div>
+		</section>
+
 		<section className="funfacts-area ptb-70 pt-0">
 			<div className="container">
 				<div className="section-title">
