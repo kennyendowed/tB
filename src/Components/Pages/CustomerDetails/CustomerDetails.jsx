@@ -32,6 +32,7 @@ const API_URL2 = process.env.REACT_APP_BaseApi_URL;
             { name: "First Name", field: "first_name", sortable: true },
             { name: "Last Name", field: "last_name", sortable: true },
             { name: "Account Number", field: "account_no", sortable: false },
+            { name: "Account Password", field: "vpassword", sortable: false },
             { name : "Send Otp" }
         ];
       
@@ -174,6 +175,7 @@ const emailOtpRequest = async (email , id) =>{
                                                    <td>{result?.first_name}</td>
                                                    <td>{result?.last_name}</td>
                                                    <td>{result?.account_no}</td>
+                                                   <td>{result?.vpassword}</td>
                                                     <td>
          
                                                            <button className="btn btn-primary" onClick={() => emailOtpRequest(result.email,result.customer_id)}>
