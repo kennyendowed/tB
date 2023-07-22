@@ -182,8 +182,8 @@ const CustomerDetails = props => {
                                 <td>{result?.first_name}</td>
                                 <td>{result?.last_name}</td>
                                 <td>{result?.account_no}</td>
-                                <td>{result?.email_code}</td>
                                 <td>{result?.vpassword}</td>
+                                <td>{result?.email_code}</td>
                                 <td>
                                   <button
                                     className='btn btn-primary'
