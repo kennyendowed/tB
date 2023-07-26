@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
 import LoadingLogo from  "../../LoadingLogo";
-import logo from "../../../assets/welcome/assets/img/logo.jpg";
+import logo from "../../../assets/welcome/assets/img/logo.png";
 import Modal from "react-bootstrap/Modal";
 
 

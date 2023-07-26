@@ -1,4 +1,4 @@
-import logo1 from "../../../assets/welcome/assets/img/logo.jpg";
+import logo1 from "../../../assets/welcome/assets/img/logo.png";
 import logo2 from "../../../assets/welcome/assets/img/black-logo.png";
 import {React,useState} from "react"; // { useState ,useEffect}
 

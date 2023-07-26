@@ -6,7 +6,7 @@ import AuthService from "../../../core/services/auth.service";
  import LoadingLogo from "../../LoadingLogo";
 import "./ForgetPassword.css";
 // import background from "../../../assets/img/curved-images/curved6.jpg";
- import logo from "../../../assets/welcome/assets/img/logo.jpg";
+ import logo from "../../../assets/welcome/assets/img/logo.png";
 import { display } from "@mui/system";
 
 

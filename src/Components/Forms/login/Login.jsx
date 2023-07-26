@@ -3,7 +3,7 @@ import { useNavigate,Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import AuthService from "../../../core/services/auth.service";
-import logo from "../../../assets/welcome/assets/img/logo.jpg";
+import logo from "../../../assets/welcome/assets/img/logo.png";
 // import LoadingSpinner from "../../../Components/spinner";
 import LoadingLogo from "../../LoadingLogo";
 import "./Login.css";
