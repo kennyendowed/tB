@@ -27,14 +27,32 @@ const TradingViewWidget = () => {
     script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js';
     script.async = true;
     script.innerHTML = JSON.stringify(widgetConfig);
-
+  
     const container = document.querySelector('.tradingview-widget-container');
     container.appendChild(script);
-
+  
     return () => {
-      container.removeChild(script);
+      // Check if the script element is still present in the DOM before removing it
+      if (container.contains(script)) {
+        container.removeChild(script);
+      }
     };
   }, []);
+  
+
+  // useEffect(() => {
+  //   const script = document.createElement('script');
+  //   script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js';
+  //   script.async = true;
+  //   script.innerHTML = JSON.stringify(widgetConfig);
+
+  //   const container = document.querySelector('.tradingview-widget-container');
+  //   container.appendChild(script);
+
+  //   return () => {
+  //     container.removeChild(script);
+  //   };
+  // }, []);
 
   return (
     <div className="tradingview-widget-container">

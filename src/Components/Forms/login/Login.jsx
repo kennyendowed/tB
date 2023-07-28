@@ -23,7 +23,7 @@ function Login() {
 
   // }
 
-  console.log(AuthService.getCurrentUser())
+ // console.log(AuthService.getCurrentUser())
   const onSubmit = async (data) => {
 
     try {
@@ -41,7 +41,7 @@ function Login() {
         },
         (ex) => {
           setisLoader(false)
-      console.log(ex)
+          console.log(ex)
           if (ex?.response?.data?.type === "firstLogin") {
             navigate("/auth/chnangePassword");
           }
