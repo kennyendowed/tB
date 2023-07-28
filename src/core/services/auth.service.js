@@ -26,13 +26,14 @@ const GetCountryInfo =() => {
 
 const login =async (username) => {
   // console.log(username)
-  return axios
+ return  axios
     .post(API_URL + "/signin",username)
     .then((response) => {
-      // console.log(response.data.data[0].accessToken)
+       console.log("iuiuiuiui",response.data)
          if (response.data.data[0].accessToken) {
           
-          sessionStorage.setItem("role" , JSON.stringify(response.data.data[0].rolesss))
+        sessionStorage.setItem("role" , JSON.stringify(response.data.data[0].rolesss))
+        sessionStorage.setItem("avater" , JSON.stringify(response.data.data[0].avater))
          localStorage.setItem("user",JSON.stringify( jwt_decode(response.data.data[0].accessToken)));
          localStorage.setItem("token", JSON.stringify(response.data.data[0].accessToken));
       }
@@ -45,6 +46,7 @@ const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   sessionStorage.removeItem("role");
+  sessionStorage.removeItem("avater");
   
 };
 
