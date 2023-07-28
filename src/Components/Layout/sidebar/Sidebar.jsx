@@ -1,7 +1,7 @@
 import {React,useState} from "react";
 import "./Sidebar.css";
 import { useNavigate, Link,useLocation } from "react-router-dom";
-import logo from "../../../assets/welcome/assets/img/logo.jpg";
+import logo from "../../../assets/welcome/assets/img/logo.png";
 import {useAuthContext,AuthContextProvider} from "../../../core/modules";
 import AuthService from "../../../core/services/auth.service";
 

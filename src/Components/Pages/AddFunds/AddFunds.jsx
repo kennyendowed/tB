@@ -1,7 +1,7 @@
 import React , { useState } from "react";
 import "./AddFunds.css";
 import dashboardService from "../../../core/services/dashboard.service";
-import logo from "../../../assets/welcome/assets/img/logo.jpg";
+import logo from "../../../assets/welcome/assets/img/logo.png";
 import { ToastContainer, toast } from 'react-toastify';
 import PulseLoader from "react-spinners/PulseLoader";
 import Swal from "sweetalert2";

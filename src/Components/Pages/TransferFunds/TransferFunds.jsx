@@ -7,7 +7,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2'
-import logo from "../../../assets/welcome/assets/img/logo.jpg";
+import logo from "../../../assets/welcome/assets/img/logo.png";
 
 const TransferFunds = (props) => {
   const INITIAL_VALUE = {
