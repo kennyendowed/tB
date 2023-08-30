@@ -116,12 +116,12 @@ import { ScaleLoader } from "react-spinners";
                                                    <td>{narra["drRemarks"]}</td>
                                                    <td>{result?.amountIn}</td>
                                                    <td>{result?.transferIn_status}</td>
-                                                   {/* <td>{result?.TransIncurrentDate}</td> */}
+                                                   <td>{result?.TransIncurrentDate}</td>
                                                  
                                                  
                                                   
                                                 
-                                                    <td>{new Date(result.createdAt).toLocaleString()}</td>
+                                                    {/* <td>{new Date(result.createdAt).toLocaleString()}</td> */}
                                                   
                                                </tr>
                                             })  ) : (

@@ -1,249 +1,214 @@
 import React, { useEffect, useState,createContext,useMemo } from "react";
 import "./GenerateTrans.css";
-import { useRecordStatusContext } from "../../../core/modules";
-import { TableHeader, Pagination, Search } from "../../DataTable";
-import LoadingLogo from "../../LoadingLogo";
 import dashboardService from "../../../core/services/dashboard.service"; 
-import { ScaleLoader } from "react-spinners";
-import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useForm } from 'react-hook-form';
-import AuthService from '../../../core/services/auth.service';
 import logo from '../../../assets/welcome/assets/img/logo.png';
+import PulseLoader from "react-spinners/PulseLoader";
+import Swal from "sweetalert2";
 
     const GenerateTrans = (props) => {
-        const navigate = useNavigate()
-        const {
-          register,
-          handleSubmit,
-          formState: { errors, isDirty, isValid }
-        } = useForm({ mode: 'onChange' })
-        const [showPassword, setShowPassword] = useState(false)
-        const [showPassword2, setShowPassword2] = useState(false)
-        const [showLoader, setisLoader] = useState(false)
-        const [showTerm, setShowTerm] = useState(false)
-      
-        const onSubmit = async data => {
-          try {
-            // return new Promise((resolve) => {
-            // 		setTimeout(() => {
-            //   resolve();
-            setisLoader(true)
-            AuthService.chnangePassword(data).then(
-              result => {
-                setisLoader(false)
-                if (result.status === 'TRUE') {
-                  const Msg = () => (
-                    <div>
-                      <img
-                        src={logo}
-                        className='toaster-brand-img h-100'
-                        alt='main_logo'
-                      />
-                      <p> {result.data[0].message} </p>
-                    </div>
-                  )
-                  toast.success(Msg, {
-                    position: 'top-right',
-                    autoClose: 10000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined
-                  })
-      
-                  // navigate("/auth/emailValidate");
-                }
-      
-                navigate('/auth')
-                // window.location.reload();
-              },
-              ex => {
-                setisLoader(false)
-                //console.log(ex);
-                if (ex?.response?.data.type === 'firstLogin') {
-                  navigate('/auth/chnangePassword')
-                }
-                if (typeof ex.response?.data?.data != 'string') {
-                  for (let err in ex.response?.data?.data) {
-                    console.log(err)
-                    let Msg = () => (
-                      <div>
-                        <img
-                          src={logo}
-                          className='toaster-brand-img h-100 wi0'
-                          alt='main_logo'
-                        />
-                        <p> {ex?.response?.data?.data[0]?.message} </p>
-                      </div>
-                    )
-                    toast.error(Msg, {
-                      position: 'top-right',
-                      autoClose: 10000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined
-                    })
-                    // this._globals.toastAlert( ex.response.data.error.data[0].message, 'error');
-                  }
-                }
-      
-                // console.log(ex.response.data.data[0].message);
-              }
-            )
-            // 	}, 2000);
-            // });
-          } catch (err) {
-            console.log(err)
-          }
-        }
-        const handleClose = () => {
-          setShowTerm(false)
-        }
+        const [ requestStatus , setRequestStatus ] = useState("")
+		const [amount , setAmount] = useState("")
+		const [ requestType , setRequestType ] = useState("")
+		const [narration , setNarration] = useState('')
+		const [date , setDate ] = useState("")
+		const [ isLoading , setIsLoading] = useState("")
+		const [accountNumber , setAccountNumber] = useState("")
 
+		const convertDateFormat =(dateString) => {
+			const dateParts = dateString.split('-');
+			return dateParts[2] + '/'+ dateParts[1] + '/' + dateParts[0] ;
+		  }
+	  const formatedDate = convertDateFormat(date)
+    const addfunds = (e) =>{
+		e.preventDefault()
+		if(requestStatus === "" ||
+		    amount === "" || 
+		    requestStatus === "" ||
+			 requestType === "" ||
+			  accountNumber === "" || 
+			  date === ""||
+			  narration === ""
+			  ){
+			
+
+		   toast.error("fields not completed")
+           return
+		}
+		const payload = {
+			requestStatus,
+			amount,
+			requestType,
+			narration,
+			date : formatedDate ,
+			accountNumber,
+            genTrabs:true
+		}
+		console.log(payload)
+		setIsLoading(true)
+	   dashboardService.addFunds(payload)
+		   .then((response) =>{
+			setIsLoading(false)
+			 console.log(response)
+			 if(response.message === "Transaction completed successfully"){
+				Swal.fire({
+					title: 'Transction Successful',
+					text: response.message,
+					icon: 'success',
+					
+				  })
+
+
+			 }
+			 setAmount("")
+			 setRequestStatus("")
+			 setDate("")
+			 setRequestType("")
+			 setNarration("")
+			 
+		   })
+		   .catch((e) =>{
+			console.log("dsgdgsdgsdfgsdsdfsdfsdfsf",e)
+			let Msg = () => (
+			  <div>
+				<img src={logo} className="toaster-brand-img h-100 wi0" alt="main_logo" />
+				<p> {e?.response?.data?.message} </p>
+			  </div>
+			)
+			toast.error(Msg, {
+			  position: "top-right",
+			  autoClose: 10000,
+			  hideProgressBar: false,
+			  closeOnClick: true,
+			  pauseOnHover: true,
+			  draggable: true,
+			  progress: undefined,
+			});
+			setIsLoading(false);
+		
+		   })
+		   .finally(()=>{
+			 setDate("")
+			 setAmount("")
+			 setRequestStatus("")
+			 setDate("")
+			 setRequestType("")
+			 setNarration("")
+			 setAccountNumber("")
+		   })
+	}
     return (
         <> 
-  <section className='contact-area ptb-70'>
-        <div className='container'>
-          <div className='section-title'>
-            <div className='bar'></div>
-            <p>Please provide all required information</p>
-          </div>
-
-          <div className='row'>
-
-            <div className='col-lg-7 col-md-12'>
-              <div className='contact-form'>
-                <form className='contactForm' onSubmit={handleSubmit(onSubmit)}>
-                  <div className='mb-3'>
-                    <label>OTP</label>
-                    <input
-                      type='text'
-                      name='token'
-                      className=' form-control login_input'
-                      aria-label='Email'
-                      aria-describedby='email-addon'
-                      placeholder='Password token'
-                      {...register('token', {
-                        required: 'token is required',
-                        minLength: {
-                          value: 4,
-                          message: 'Password must be more than 4 characters'
-                        }
-                        // maxLength: {
-                        //   value: 10,
-                        //   message: "Password cannot exceed more than 10 characters",
-                        // },
-                      })}
-                    />
-                  </div>
-                  <div className='mb-3'>
-                    <label>New password</label>
-                    <div className='mb-3 relative password-field'>
-                      <input
-                        type={showPassword ? 'text' : 'password'}
-                        name='password'
-                        className=' form-control login_input'
-                        aria-label='Email'
-                        aria-describedby='email-addon'
-                        placeholder='Password'
-                        {...register('password', {
-                          required: 'Password is required',
-                          minLength: {
-                            value: 4,
-                            message: 'Password must be more than 4 characters'
-                          }
-                          // maxLength: {
-                          //   value: 10,
-                          //   message: "Password cannot exceed more than 10 characters",
-                          // },
-                        })}
-                      />
-                      <div
-                        className='icon-container'
-                        onClick={() => setShowPassword(shown => !shown)}
-                      >
-                        {showPassword ? (
-                          <i className='fa-solid fa-eye-slash'></i>
-                        ) : (
-                          <i className='fa-solid fa-eye'></i>
-                        )}
-                      </div>
-                    </div>
-                    <p className='error-color'>{errors.password?.message}</p>
-                  </div>
-                  <div className='mb-3'>
-                    <label>Verify password</label>
-                    <div className='mb-3 relative password-field'>
-                      <input
-                        type={showPassword2 ? 'text' : 'password'}
-                        name='password_confirmation'
-                        className=' form-control login_input'
-                        aria-label='Email'
-                        aria-describedby='email-addon'
-                        placeholder='Verify Password'
-                        {...register('password_confirmation', {
-                          required: 'Password confirmation is required',
-                          minLength: {
-                            value: 4,
-                            message: 'Password must be more than 4 characters'
-                          }
-                          // maxLength: {
-                          //   value: 10,
-                          //   message: "Password cannot exceed more than 10 characters",
-                          // },
-                        })}
-                      />
-                      <div
-                        className='icon-container'
-                        onClick={() => setShowPassword2(shown => !shown)}
-                      >
-                        {showPassword ? (
-                          <i className='fa-solid fa-eye-slash'></i>
-                        ) : (
-                          <i className='fa-solid fa-eye'></i>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className='col-lg-12 col-md-12'>
-                    {!showLoader ? (
-                      <button
-                        type='submit'
-                        className='btn btn-primary'
-                        disabled={!isDirty || !isValid}
-                      >
-                        Submit
-                      </button> // disabled={!isDirty || !isValid}
-                    ) : (
-                      <button className='btn btn-primary' disabled>
-                        <LoadingLogo />
-                      </button>
-                    )}
-
-                    <div className='clearfix'></div>
-                  </div>
-                  <p>
-                    <a
-                      onClick={() => setShowTerm(true)}
-                      style={{ color: '#efb331' }}
-                    >
-                      {' '}
-                      Request Otp Via Email
-                    </a>
-                  </p>
-                </form>
-              </div>
-            </div>
-          </div>
-
-         
-        </div>
-      </section>
+ <div className="header">
+						<h1 className="header-title">
+						Generate Transactions
+						</h1>				
+					</div>
+					<div className="row">
+					<div className="col-md-12">
+							<div className="card">
+								<div className="card-header">
+								
+									<h6 className="card-subtitle text-muted">Please enter the receivers payment details</h6>
+								</div>
+								<div className="card-body">
+									<form onSubmit = {addfunds}>
+										<div className="row">
+										  <div className="mb-3 col-md-6">
+												<label >Enter Account Number</label>
+												<input
+												 type="text" 
+												 className="form-control" 
+												 id="inputPassword4" 
+												 placeholder="Enter Account Number" 
+												  value ={accountNumber}
+												  onChange = {(e) => setAccountNumber(e.target.value)}
+												 />
+											</div>
+											<div className="mb-3 col-md-6">
+												<label >Request Status</label>
+												<select 
+												type="text" 
+												className="form-control" 
+												id="inputPassword4"
+												value = {requestStatus}  
+												onChange = {(e) => setRequestStatus(e.target.value)}
+												>
+												     <option value = ""> -- Select -- </option>
+												      <option value="Paid"> Paid </option>
+													  <option value="Pending">Pending</option>
+													  <option value="Failed">Failed</option>
+												</select>
+										       </div>
+										   </div>
+										<div className="row mb-3">
+										  <div className="mb-3 col-md-6">
+											<label >Enter Amount</label>
+											<input type="text" 
+											className="form-control" 
+											id="inputAddress2" 
+											placeholder="Enter Amount" 
+											 value = {amount}
+											 onChange = {(e) => setAmount(e.target.value)}
+											/>
+										  </div>
+										   <div className="mb-3 col-md-6">
+											 <label >Request Type</label>
+											 <select 
+											 type="text" 
+											 className="form-control" 
+											 id="inputAddress2" 
+											 value = {requestType}
+											 onChange = {(e) => {setRequestType(e.target.value)}}
+											 >
+											    <option value = ""> -- Select -- </option>
+											    <option value = "Transfer">Transfer</option>
+												<option value = "Credit"> Credit</option>
+												<option value = "Debit"> Debit</option>
+											 </select>
+										  </div>
+										</div>
+										<div className="row mb-3">
+										    <div className="mb-3 col-md-6">
+											 <label >Enter Date</label>
+											  <input 
+											  type="date" 
+											  className="form-control" 
+											  id="inputAddress2" 
+											  value = {date} 
+											  onChange ={(e)=>setDate(e.target.value)}
+											  
+											  
+											  />
+										    </div>
+										 
+										  </div>
+										
+										<div className="mb-3 row">
+											<label className="col-form-label col-sm-2 text-sm-end">Narration</label>
+											<div className="col-sm-10">
+												<textarea 
+												className="form-control" 
+												placeholder="Textarea" rows="3"
+												 value = {narration}
+												 onChange = {(e) => {setNarration(e.target.value)}}
+												></textarea>
+											</div>
+											
+										</div>
+										<div className="col-lg-12 col-md-12">
+                                            <button type="submit" className="btn-lg btn-primary border-0 bg-gradient-info w-100 h-80 mt-4 login_button mb-0">
+											   {isLoading ? <PulseLoader color="#fff"/>:"Submit"}
+											</button>
+                                         
+                                        </div>
+									
+									</form>
+								</div>
+							</div>
+						</div>
+					
+					</div>
         </>
     
       );
