@@ -402,7 +402,7 @@ const TransferFunds = (props) => {
                     onChange={handleInputChange}
                   />
                   <div className="text-danger">
-                    {data.routingNumber ? "" : "Account Number is required"}
+                    {data.routingNumber ? "" : "Routing Number is required"}
                   </div>
                 </div>
                 <div className="mb-3">
@@ -417,7 +417,7 @@ const TransferFunds = (props) => {
                     onChange={handleInputChange}
                   />
                   <div className="text-danger">
-                    {data.bankNmae ? "" : "Account Number is required"}
+                    {data.bankNmae ? "" : "Bank Name is required"}
                   </div>
                 </div>
                 <div className="mb-3">
@@ -432,7 +432,7 @@ const TransferFunds = (props) => {
                     onChange={handleInputChange}
                   />
                   <div className="text-danger ">
-                    {data.amount ? "" : "Account Number is required"}
+                    {data.amount ? "" : "Amount is required"}
                   </div>
                 </div>
                 <div className="col-lg-12 col-md-12">
