@@ -15,17 +15,27 @@ const Sidebar = (props) => {
   const location = useLocation()
   const { currentUser , logout ,hamburger } = useAuthContext();
   const [toggleMenu, settoggle] = useState(false);
-  
+  let sanitizedAvatar ="";
 
   //const role = JSON.parse(sessionStorage.getItem("role"))
-  const cavater = sessionStorage.getItem("avater").replace(/"/g, '')
-  console.log(cavater)
+  const cavater = sessionStorage.getItem("avater")
   const logOut = () => {
     AuthService.logout();
     logout();
     navigate("/auth");
     // window.location.reload();
   };
+if (cavater !== null) {
+   sanitizedAvatar = cavater.replace(/"/g, '');
+  // Now you can use sanitizedAvatar
+  console.log(sanitizedAvatar);
+} else {
+  console.log("Avatar value is null");
+  logOut();
+}
+
+  console.log(cavater)
+
   function toogleDropdownbottonState() {
     if (toggleMenu) {
         settoggle(false)
@@ -43,7 +53,7 @@ const Sidebar = (props) => {
                                 </Link>
 			<div className="sidebar-content">
 				<div className="sidebar-user">
-					<img src={cavater} className="img-fluid rounded-circle mb-2" alt={currentUser?.first_name + " " + currentUser?.last_name} />
+					<img src={sanitizedAvatar} className="img-fluid rounded-circle mb-2" alt={currentUser?.first_name + " " + currentUser?.last_name} />
 					<div className="fw-bold">{currentUser?.first_name + " " + currentUser?.last_name} </div>
 					{/* <small>Front-end Developer</small> */}
 				</div>
