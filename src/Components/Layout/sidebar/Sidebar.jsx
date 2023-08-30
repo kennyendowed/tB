@@ -4,6 +4,7 @@ import { useNavigate, Link,useLocation } from "react-router-dom";
 import logo from "../../../assets/welcome/assets/img/logo.png";
 import {useAuthContext,AuthContextProvider} from "../../../core/modules";
 import AuthService from "../../../core/services/auth.service";
+import Transactions from './../../Pages/Transactions/index';
 
 
 
@@ -83,6 +84,10 @@ const Sidebar = (props) => {
                  <Link to={"/addFunds"} className="sidebar-link"> 	   <i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Fund || Debit Accounts</span>    </Link>  
                  
 					    	</li>
+                {/* <li className={location.pathname === '/generateTrans' ? 'sidebar-item  active':'sidebar-item'}>
+                 <Link to={"/generateTrans"} className="sidebar-link"> 	   <i className="align-middle me-2 fas fa-fw fa-bandcamp"></i> <span className="align-middle">Generate || Transactions</span>    </Link>  
+                 
+					    	</li> */}
                 <li className={location.pathname === '/customerDetails' ? 'sidebar-item  active':'sidebar-item'}>
                  <Link to={"/customerDetails"} className="sidebar-link"> 	   <i className="align-middle me-2 fas fa-fw fa-file"></i> <span className="align-middle">Customers Details</span>    </Link>  
                  

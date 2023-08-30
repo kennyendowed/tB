@@ -16,6 +16,7 @@ import SettingsPage from "../views/settings";
 import AddFunds from "../Components/Pages/AddFunds";
 import TransferFunds from "../Components/Pages/TransferFunds";
 import Transactions from "../Components/Pages/Transactions";
+import GenerateTrans from "../Components/Pages/GenerateTrans";
 import LoginPage from "../views/authentication";
 // import BatchApproval from "../Components/Pages/BatchApproval";
 import CustomerDetails from "../Components/Pages/CustomerDetails"
@@ -24,6 +25,7 @@ import WelcomePage from "../views/welcome";
 import About from "../views/about";
 import Contact from "../views/contact";
 import Faq from "../views/faq";
+
 
 
 const MainRoutes = () => (
@@ -37,6 +39,7 @@ const MainRoutes = () => (
             <Route path="/" element={<Navigate replace to="dashboard" />} />
 			<Route path="/dashboard" element={<DashboardPage />} />
 				<Route path = "/addFunds" element ={<AddFunds/>}/>
+				<Route path = "/generateTrans" element ={<GenerateTrans/>}/>
 				<Route path = "/transferFunds" element ={<TransferFunds/>}/>
 				<Route path = "/Transactions" element ={<Transactions/>}/>
 				<Route path = "/customerDetails" element ={<CustomerDetails/>} />
